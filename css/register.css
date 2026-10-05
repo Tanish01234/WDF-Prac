@@ -1,0 +1,70 @@
+
+.register-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container {
+  max-width: 760px;
+  margin: 3rem auto;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+.register-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.5rem;
+}
+
+.register-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.register-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.auth-switch-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .register-card {
+    padding: 1.5rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

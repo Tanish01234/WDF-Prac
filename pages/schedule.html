@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Official Academic Timetable — CHARUSAT / DEPSTAR B.Tech IT 3rd Semester (Odd Term 2026–27). Real-time schedule, faculty allocations, and lab batches.">
+  <title>Academic Timetable — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/schedule.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Portal Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon sidebar-close-btn" aria-label="Close sidebar" style="display: none;">✕</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Overview</div>
+          <div class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+              </span>
+              <span>Dashboard</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="courses.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </span>
+              <span>Courses</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="schedule.html" class="nav-link active">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </span>
+              <span>Timetable</span>
+              <span class="nav-badge-count">Live</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="events.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </span>
+              <span>Events</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="notices.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              </span>
+              <span>Notices</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Academics</div>
+          <div class="nav-item">
+            <a href="attendance.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+              </span>
+              <span>Attendance</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="resources.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+              </span>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Personal</div>
+          <div class="nav-item">
+            <a href="profile.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <span>Profile</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="feedback.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </span>
+              <span>Settings</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="student-card-mini" style="text-decoration: none;">
+          <div class="student-avatar">TB</div>
+          <div class="student-info-mini">
+            <div class="student-name">Tanis Bedia</div>
+            <div class="student-meta">25DIT006 · 3IT-A</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="portal-main">
+      <div class="mobile-header">
+        <button type="button" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+        <a href="../index.html" class="brand-logo" style="font-size: 1.15rem;">
+          <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <span class="topbar-search-icon">🔍</span>
+            <input type="text" class="topbar-search-input" placeholder="Search timetable...">
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <a href="profile.html" class="student-avatar" style="width: 36px; height: 36px; text-decoration: none;">TB</a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+        <section class="timetable-header-card">
+          <div>
+            <span class="badge badge-accent" style="margin-bottom: 0.35rem;">Official Academic Schedule</span>
+            <h2>CHARUSAT UNIVERSITY — DEPSTAR</h2>
+            <p style="margin: 0.25rem 0 0;">Department of Information Technology • B.Tech IT 3rd Semester (Odd Term 2026–27) • Effective: 06/07/2026</p>
+          </div>
+          <div class="flex gap-1">
+            <a href="../assets/images/timetable_source.png" target="_blank" class="btn btn-secondary btn-sm" title="View Original University Timetable Document">
+              🖼️ Source Image
+            </a>
+            <button type="button" class="btn btn-primary btn-sm" id="printBtn">🖨️ Print Schedule</button>
+          </div>
+        </section>
+
+        <!-- Current class banner -->
+        <div class="current-class-banner" id="currentClassBanner">
+          <div class="pulse-indicator"></div>
+          <div id="currentClassText">
+            Checking academic class schedule...
+          </div>
+        </div>
+
+        <!-- Timetable controls -->
+        <div class="timetable-controls">
+          <input type="text" id="timetableSearch" placeholder="🔍 Search subject, room or faculty..." style="flex: 1; min-width: 200px;">
+          <select id="dayFilter" aria-label="Filter by Day">
+            <option value="all">All Days (Mon–Sat)</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>
+          <select id="subjectFilter" aria-label="Filter by Course">
+            <option value="all">All Courses</option>
+            <option value="WDF">WDF (ITUE203)</option>
+            <option value="FCN">FCN (ITUC201)</option>
+            <option value="FDSA">FDSA (CSUC201)</option>
+            <option value="OOP">OOP (CEUE203)</option>
+            <option value="DM">DM (MSUD203)</option>
+            <option value="CPI">CPI (HSUV201)</option>
+          </select>
+          <button type="button" class="btn btn-secondary btn-sm" id="todayBtn">📅 Today</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="resetBtn">🔄 Reset</button>
+        </div>
+
+        <!-- Timetable table -->
+        <div class="table-responsive">
+          <table class="timetable-table" id="masterTimetable">
+            <thead>
+              <tr>
+                <th style="width: 140px;">Time-Slots</th>
+                <th data-day="Monday">Monday</th>
+                <th data-day="Tuesday">Tuesday</th>
+                <th data-day="Wednesday">Wednesday</th>
+                <th data-day="Thursday">Thursday</th>
+                <th data-day="Friday">Friday</th>
+                <th data-day="Saturday">Saturday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-slot">09:10 - 10:10</td>
+                <td class="class-cell" data-day="Monday" data-subject="WDF" data-code="ITUE203" data-room="222" data-faculty="JV">
+                  <div class="class-code">ITUE203</div>
+                  <div class="class-subject">WDF</div>
+                  <div class="class-meta">Room 222 • Prof. JV</div>
+                </td>
+                <td class="class-cell" data-day="Tuesday" data-subject="FCN" data-code="ITUC201" data-room="123" data-faculty="RHP">
+                  <div class="class-code">ITUC201</div>
+                  <div class="class-subject">FCN</div>
+                  <div class="class-meta">Room 123 • Prof. RHP</div>
+                </td>
+                <td class="class-cell" data-day="Wednesday" data-subject="DM" data-code="MSUD203" data-room="124" data-faculty="RVS">
+                  <div class="class-code">MSUD203</div>
+                  <div class="class-subject">DM</div>
+                  <div class="class-meta">Room 124 • Prof. RVS</div>
+                </td>
+                <td class="class-cell" data-day="Thursday" data-subject="FDSA" data-code="CSUC201" data-room="123" data-faculty="CUR">
+                  <div class="class-code">CSUC201</div>
+                  <div class="class-subject">FDSA</div>
+                  <div class="class-meta">Room 123 • Prof. CUR</div>
+                </td>
+                <td class="class-cell" data-day="Friday" data-subject="WDF" data-code="ITUE203" data-room="123" data-faculty="JV">
+                  <div class="class-code">ITUE203</div>
+                  <div class="class-subject">WDF</div>
+                  <div class="class-meta">Room 123 • Prof. JV</div>
+                </td>
+                <td class="class-cell practical" rowspan="2" data-day="Saturday" data-subject="Skill Lab" data-code="SKILL" data-room="Innovation Lab" data-faculty="Dept">
+                  <div class="class-code">SKILL201</div>
+                  <div class="class-subject">Skill Enhancement</div>
+                  <div class="class-meta">Project & Lab Practice</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="time-slot">10:10 - 11:10</td>
+                <td class="class-cell" data-day="Monday" data-subject="FCN" data-code="ITUC201" data-room="222" data-faculty="RHP">
+                  <div class="class-code">ITUC201</div>
+                  <div class="class-subject">FCN</div>
+                  <div class="class-meta">Room 222 • Prof. RHP</div>
+                </td>
+                <td class="class-cell" data-day="Tuesday" data-subject="OOP" data-code="CEUE203" data-room="123" data-faculty="DAG">
+                  <div class="class-code">CEUE203</div>
+                  <div class="class-subject">OOP</div>
+                  <div class="class-meta">Room 123 • Prof. DAG</div>
+                </td>
+                <td class="class-cell" data-day="Wednesday" data-subject="FDSA" data-code="CSUC201" data-room="124" data-faculty="PHP">
+                  <div class="class-code">CSUC201</div>
+                  <div class="class-subject">FDSA</div>
+                  <div class="class-meta">Room 124 • Prof. PHP</div>
+                </td>
+                <td class="class-cell" data-day="Thursday" data-subject="OOP" data-code="CEUE203" data-room="123" data-faculty="DAG">
+                  <div class="class-code">CEUE203</div>
+                  <div class="class-subject">OOP</div>
+                  <div class="class-meta">Room 123 • Prof. DAG</div>
+                </td>
+                <td class="class-cell" data-day="Friday" data-subject="DM" data-code="MSUD203" data-room="124" data-faculty="RVS">
+                  <div class="class-code">MSUD203</div>
+                  <div class="class-subject">DM</div>
+                  <div class="class-meta">Room 124 • Prof. RVS</div>
+                </td>
+              </tr>
+
+              <tr class="break-row">
+                <td class="time-slot font-mono">11:10 - 12:10</td>
+                <td colspan="6" class="break-cell">🍴 Lunch Break (11:10 AM – 12:10 PM)</td>
+              </tr>
+
+              <tr>
+                <td class="time-slot">12:10 - 01:10</td>
+                <td class="class-cell practical" rowspan="2" data-day="Monday" data-subject="FCN(P) / WDF(P)" data-code="ITUC201" data-room="218 / 303" data-faculty="MH / JP / VKM">
+                  <div class="batch-grid">
+                    <div class="batch-item"><span><strong>A:</strong> FCN(P)</span> <span>R218 • MH</span></div>
+                    <div class="batch-item"><span><strong>B:</strong> FCN(P)</span> <span>R218 • JP</span></div>
+                    <div class="batch-item"><span><strong>C:</strong> WDF(P)</span> <span>R303 • VKM</span></div>
+                  </div>
+                </td>
+                <td class="class-cell" data-day="Tuesday" data-subject="DM" data-code="MSUD203" data-room="123" data-faculty="RVS">
+                  <div class="class-code">MSUD203</div>
+                  <div class="class-subject">DM</div>
+                  <div class="class-meta">Room 123 • Prof. RVS</div>
+                </td>
+                <td class="class-cell" data-day="Wednesday" data-subject="FCN" data-code="ITUC201" data-room="125" data-faculty="RHP">
+                  <div class="class-code">ITUC201</div>
+                  <div class="class-subject">FCN</div>
+                  <div class="class-meta">Room 125 • Prof. RHP</div>
+                </td>
+                <td class="class-cell" rowspan="2" data-day="Thursday" data-subject="CPI" data-code="HSUV201" data-room="123" data-faculty="VHP">
+                  <div class="class-code">HSUV201</div>
+                  <div class="class-subject">CPI</div>
+                  <div class="class-meta">Room 123 • Prof. VHP</div>
+                  <span class="badge badge-accent" style="font-size: 0.65rem; margin-top: 0.25rem;">2-Hour Block</span>
+                </td>
+                <td class="class-cell practical" rowspan="2" data-day="Friday" data-subject="OOP(P) / WDF(P) / FDSA(P)" data-code="CEUE203" data-room="204 / 206 / 208" data-faculty="MPD / JP / ARP">
+                  <div class="batch-grid">
+                    <div class="batch-item"><span><strong>A:</strong> OOP(P)</span> <span>R204 • MPD</span></div>
+                    <div class="batch-item"><span><strong>B:</strong> WDF(P)</span> <span>R206 • JP</span></div>
+                    <div class="batch-item"><span><strong>C:</strong> FDSA(P)</span> <span>R208 • ARP</span></div>
+                  </div>
+                </td>
+                <td class="class-cell" rowspan="2" data-day="Saturday" data-subject="Remedial" data-code="REMEDIAL" data-room="208" data-faculty="Faculties">
+                  <div class="class-subject">Remedial Session</div>
+                  <div class="class-meta">Room 208 • Practical Viva</div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="time-slot">01:10 - 02:10</td>
+                <td class="class-cell" data-day="Tuesday" data-subject="Counselling" data-code="COUNSEL" data-room="123" data-faculty="SYS">
+                  <div class="class-subject">Counselling</div>
+                  <div class="class-meta">Room 123 • Prof. SYS</div>
+                </td>
+                <td class="class-cell" data-day="Wednesday" data-subject="Counselling" data-code="COUNSEL" data-room="125" data-faculty="PC">
+                  <div class="class-subject">Counselling</div>
+                  <div class="class-meta">Room 125 • Prof. PC</div>
+                </td>
+              </tr>
+
+              <tr class="break-row">
+                <td class="time-slot font-mono">02:10 - 02:20</td>
+                <td colspan="6" class="break-cell">☕ Short Break (02:10 PM – 02:20 PM)</td>
+              </tr>
+
+              <tr>
+                <td class="time-slot">02:20 - 03:20</td>
+                <td class="class-cell practical" rowspan="2" data-day="Monday" data-subject="FDSA(P) / OOP(P)" data-code="CSUC201" data-room="208 / 204" data-faculty="ARP / MPD">
+                  <div class="batch-grid">
+                    <div class="batch-item"><span><strong>A:</strong> FDSA(P)</span> <span>R208 • ARP</span></div>
+                    <div class="batch-item"><span><strong>B:</strong> FDSA(P)</span> <span>R208 • ARP</span></div>
+                    <div class="batch-item"><span><strong>C:</strong> OOP(P)</span> <span>R204 • MPD</span></div>
+                  </div>
+                </td>
+                <td class="class-cell practical" rowspan="2" data-day="Tuesday" data-subject="WDF(P) / OOP(P) / FDSA(P)" data-code="ITUE203" data-room="206 / 204 / 208" data-faculty="JP / MPD / ARP">
+                  <div class="batch-grid">
+                    <div class="batch-item"><span><strong>A:</strong> WDF(P)</span> <span>R206 • JP</span></div>
+                    <div class="batch-item"><span><strong>B:</strong> OOP(P)</span> <span>R204 • MPD</span></div>
+                    <div class="batch-item"><span><strong>C:</strong> FDSA(P)</span> <span>R208 • ARP</span></div>
+                  </div>
+                </td>
+                <td class="class-cell practical" rowspan="2" data-day="Wednesday" data-subject="WDF(P) / FCN(P)" data-code="ITUE203" data-room="208 / 218" data-faculty="SHP / JP / MH">
+                  <div class="batch-grid">
+                    <div class="batch-item"><span><strong>A:</strong> WDF(P)</span> <span>R208 • SHP</span></div>
+                    <div class="batch-item"><span><strong>B:</strong> FCN(P)</span> <span>R218 • JP</span></div>
+                    <div class="batch-item"><span><strong>C:</strong> FCN(P)</span> <span>R218 • MH</span></div>
+                  </div>
+                </td>
+                <td class="class-cell" data-day="Thursday" data-subject="WDF" data-code="ITUE203" data-room="329" data-faculty="VKM">
+                  <div class="class-code">ITUE203</div>
+                  <div class="class-subject">WDF</div>
+                  <div class="class-meta">Room 329 • Prof. VKM</div>
+                </td>
+                <td class="class-cell" data-day="Friday" data-subject="FDSA" data-code="CSUC201" data-room="123" data-faculty="CUR">
+                  <div class="class-code">CSUC201</div>
+                  <div class="class-subject">FDSA</div>
+                  <div class="class-meta">Room 123 • Prof. CUR</div>
+                </td>
+                <td class="text-muted text-xs" rowspan="2" style="background: var(--bg-surface);">
+                  Free / Library Study
+                </td>
+              </tr>
+
+              <tr>
+                <td class="time-slot">03:20 - 04:20</td>
+                <td class="class-cell" data-day="Thursday" data-subject="DM" data-code="MSUD203" data-room="123" data-faculty="RVS">
+                  <div class="class-code">MSUD203</div>
+                  <div class="class-subject">DM</div>
+                  <div class="class-meta">Room 123 • Prof. RVS</div>
+                </td>
+                <td class="class-cell" data-day="Friday" data-subject="FCN" data-code="ITUC201" data-room="125" data-faculty="RHP">
+                  <div class="class-code">ITUC201</div>
+                  <div class="class-subject">FCN</div>
+                  <div class="class-meta">Room 125 • Prof. RHP</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Legend -->
+        <section class="timetable-legend">
+          <div class="grid grid-2" style="gap: 2rem;">
+            <div>
+              <h4 style="margin-bottom: 0.75rem; color: var(--text-primary); font-size: 1rem;">Course Code Reference</h4>
+              <ul style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem;">
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">ITUC201:</strong> Fundamentals of Computer Networks (FCN)</li>
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">CSUC201:</strong> Fundamentals of Data Structures and Algorithms (FDSA)</li>
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">ITUE203:</strong> Web Development Frameworks (WDF)</li>
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">CEUE203:</strong> Object Oriented Programming (OOP)</li>
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">MSUD203:</strong> Discrete Mathematics (DM)</li>
+                <li><strong class="font-mono text-xs" style="color: var(--accent-primary);">HSUV201:</strong> Creativity, Problem Solving and Innovation (CPI)</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin-bottom: 0.75rem; color: var(--text-primary); font-size: 1rem;">Faculty Abbreviations</h4>
+              <div class="grid grid-2" style="gap: 0.5rem; font-size: 0.825rem;">
+                <div><strong>JV:</strong> Prof. Jignesh Vania</div>
+                <div><strong>RHP:</strong> Prof. Ritesh Patel</div>
+                <div><strong>RVS:</strong> Prof. R. V. Savaliya</div>
+                <div><strong>CUR:</strong> Prof. Chintan Raval</div>
+                <div><strong>DAG:</strong> Prof. Dharmendra Gohel</div>
+                <div><strong>PHP:</strong> Prof. Parth Patel</div>
+                <div><strong>MH:</strong> Prof. M. H. Vaghela</div>
+                <div><strong>JP:</strong> Prof. Jignesh Patel</div>
+                <div><strong>VKM:</strong> Prof. V. K. Modi</div>
+                <div><strong>ARP:</strong> Prof. Amit Patel</div>
+                <div><strong>SHP:</strong> Prof. Shital Patel</div>
+                <div><strong>MPD:</strong> Prof. M. P. Dave</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Class details modal -->
+  <div class="modal-backdrop" id="classModal" role="dialog" aria-modal="true" aria-labelledby="classModalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="classModalTitle">Class & Lab Session Details</h3>
+        <button type="button" class="modal-close" data-modal-dismiss aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" id="classModalDetails">
+        <!-- Injected by js/schedule.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/schedule.js"></script>
+</body>
+</html>

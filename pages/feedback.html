@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Student Feedback — Share your thoughts, report interface suggestions, or rate the portal experience.">
+  <title>Student Portal Feedback — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/feedback.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Portal Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon sidebar-close-btn" aria-label="Close sidebar" style="display: none;">✕</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Main Menu</div>
+          <div class="nav-item"><a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span><span>Overview</span></a></div>
+          <div class="nav-item"><a href="courses.html" class="nav-link"><span class="nav-icon">📚</span><span>Courses</span></a></div>
+          <div class="nav-item"><a href="schedule.html" class="nav-link"><span class="nav-icon">📅</span><span>Timetable</span><span class="nav-badge-count">Live</span></a></div>
+          <div class="nav-item"><a href="events.html" class="nav-link"><span class="nav-icon">⚡</span><span>Events</span></a></div>
+          <div class="nav-item"><a href="notices.html" class="nav-link"><span class="nav-icon">📢</span><span>Notices</span></a></div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Academic & Resources</div>
+          <div class="nav-item"><a href="resources.html" class="nav-link"><span class="nav-icon">📂</span><span>Resources</span></a></div>
+          <div class="nav-item"><a href="about.html" class="nav-link"><span class="nav-icon">ℹ️</span><span>About Synora</span></a></div>
+          <div class="nav-item"><a href="faq.html" class="nav-link"><span class="nav-icon">❓</span><span>FAQ</span></a></div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Personal & Support</div>
+          <div class="nav-item"><a href="profile.html" class="nav-link"><span class="nav-icon">👤</span><span>Profile</span></a></div>
+          <div class="nav-item"><a href="register.html" class="nav-link"><span class="nav-icon">📝</span><span>Registration</span></a></div>
+          <div class="nav-item"><a href="contact.html" class="nav-link"><span class="nav-icon">✉️</span><span>Contact</span></a></div>
+          <div class="nav-item"><a href="feedback.html" class="nav-link active"><span class="nav-icon">💬</span><span>Feedback</span></a></div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="student-card-mini" style="text-decoration: none;">
+          <div class="student-avatar">TB</div>
+          <div class="student-info-mini">
+            <div class="student-name">Tanis Bedia</div>
+            <div class="student-meta">25DIT006 • 3IT-A</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="portal-main">
+      <div class="mobile-header">
+        <button type="button" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+        <a href="../index.html" class="brand-logo" style="font-size: 1.15rem;">
+          <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <span class="topbar-search-icon">🔍</span>
+            <input type="text" class="topbar-search-input" placeholder="Search portal...">
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <a href="profile.html" class="student-avatar" style="width: 36px; height: 36px; text-decoration: none;">TB</a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1><span>💬</span> Student Feedback & Portal Rating</h1>
+            <p class="page-subtitle">Help improve Synora by reporting your experience and practical suggestions</p>
+          </div>
+        </div>
+
+        <div class="feedback-container">
+          <div class="card">
+            <form id="feedbackForm" action="../backend/forms/feedback.php" method="POST" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="fbName">Your Name <span class="required">*</span></label>
+                <input type="text" id="fbName" name="name" class="form-input" placeholder="e.g. Tanis Bedia" required>
+                <div class="form-feedback" id="fbNameFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fbEmail">Student Email <span class="required">*</span></label>
+                <input type="email" id="fbEmail" name="email" class="form-input" placeholder="student@charusat.edu.in" required>
+                <div class="form-feedback" id="fbEmailFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fbCategory">Feedback Category <span class="required">*</span></label>
+                <select id="fbCategory" name="category" class="form-select" required>
+                  <option value="">Select Category</option>
+                  <option value="Timetable & Schedule" selected>Timetable & Class Schedule</option>
+                  <option value="Events & Registration">Campus Events & Fetch API</option>
+                  <option value="UI & Themes">Dark/Light Themes & Mobile UI</option>
+                  <option value="Courses & Materials">Curriculum & Lab Manuals</option>
+                  <option value="General">General Campus Suggestion</option>
+                </select>
+                <div class="form-feedback" id="fbCategoryFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Rate Portal Experience</label>
+                <div class="flex gap-2 items-center" style="padding: 0.5rem 0;">
+                  <label class="form-check"><input type="radio" name="rating" value="5" checked><span>⭐⭐⭐⭐⭐ Excellent</span></label>
+                  <label class="form-check"><input type="radio" name="rating" value="4"><span>⭐⭐⭐⭐ Good</span></label>
+                  <label class="form-check"><input type="radio" name="rating" value="3"><span>⭐⭐⭐ Average</span></label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fbComments">Detailed Feedback / Suggestions <span class="required">*</span></label>
+                <textarea id="fbComments" name="comments" class="form-textarea" rows="4" placeholder="Share your experience or report any bug..." required></textarea>
+                <div class="form-feedback" id="fbCommentsFeedback"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                Submit Feedback →
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/validation.js"></script>
+</body>
+</html>

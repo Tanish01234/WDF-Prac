@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Student Profile — Student record, academic performance, and personal information for Tanis Bedia (25DIT006) at CHARUSAT DEPSTAR.">
+  <title>Student Profile — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/profile.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Portal Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon sidebar-close-btn" aria-label="Close sidebar" style="display: none;">✕</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Overview</div>
+          <div class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+              </span>
+              <span>Dashboard</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="courses.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </span>
+              <span>Courses</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="schedule.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </span>
+              <span>Timetable</span>
+              <span class="nav-badge-count">Live</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="events.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </span>
+              <span>Events</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="notices.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              </span>
+              <span>Notices</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Academics</div>
+          <div class="nav-item">
+            <a href="attendance.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+              </span>
+              <span>Attendance</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="resources.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+              </span>
+              <span>Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Personal</div>
+          <div class="nav-item">
+            <a href="profile.html" class="nav-link active">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <span>Profile</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="feedback.html" class="nav-link">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </span>
+              <span>Settings</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="student-card-mini" style="text-decoration: none;">
+          <div class="student-avatar">TB</div>
+          <div class="student-info-mini">
+            <div class="student-name">Tanis Bedia</div>
+            <div class="student-meta">25DIT006 · 3IT-A</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="portal-main">
+      <div class="mobile-header">
+        <button type="button" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+        <a href="../index.html" class="brand-logo" style="font-size: 1.15rem;">
+          <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <span class="topbar-search-icon">🔍</span>
+            <input type="text" class="topbar-search-input" placeholder="Search portal...">
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <a href="profile.html" class="student-avatar" style="width: 36px; height: 36px; text-decoration: none;">TB</a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+        <section class="profile-hero-card">
+          <div class="flex items-center gap-3" style="flex-wrap: wrap;">
+            <div class="profile-avatar-large">TB</div>
+            <div class="profile-main-info">
+              <h2 id="profileNameDisplay">Tanis Bedia</h2>
+              <div class="profile-badges-row">
+                <span class="badge badge-accent font-mono">25DIT006</span>
+                <span class="badge badge-info">B.Tech Information Technology</span>
+                <span class="badge badge-muted">Semester 3 • Division 3IT-A</span>
+                <span class="badge badge-success">Active Enrolled</span>
+              </div>
+              <p class="profile-bio-text" id="profileBioDisplay">
+                3rd Semester B.Tech Information Technology student at DEPSTAR, CHARUSAT University. Focused on full-stack web architectures, algorithms, and networked systems.
+              </p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" id="editProfileBtn">
+            ✏️ Edit Profile
+          </button>
+        </section>
+
+        <section class="profile-details-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📋 Student Academic Credentials</span>
+              </div>
+            </div>
+            <div class="info-list">
+              <div class="info-item">
+                <span class="info-label">Student ID / Roll No</span>
+                <span class="info-val font-mono">25DIT006</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">University Email</span>
+                <span class="info-val" id="profileEmailDisplay">25dit006@charusat.edu.in</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Mobile Contact</span>
+                <span class="info-val font-mono" id="profileMobileDisplay">+91 98765 43210</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Department</span>
+                <span class="info-val">Department of Information Technology</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Faculty / Institute</span>
+                <span class="info-val">DEPSTAR — CHARUSAT</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Academic Mentor</span>
+                <span class="info-val">Prof. S. Y. Shah (SYS)</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Lab Practical Batch</span>
+                <span class="info-val font-bold" style="color: var(--accent-primary);">Batch A (Rooms 208, 218, 206, 204)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📊 Term Performance</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center" style="margin-bottom: 0.35rem;">
+                  <span class="text-xs text-muted font-bold uppercase">Current CGPA</span>
+                  <span class="badge badge-success font-bold">8.65 / 10.0</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill success" style="width: 86.5%;"></div>
+                </div>
+              </div>
+
+              <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <div class="flex justify-between items-center" style="margin-bottom: 0.35rem;">
+                  <span class="text-xs text-muted font-bold uppercase">Lecture Gross Attendance</span>
+                  <span class="badge font-bold">63%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill warning" style="width: 63%;"></div>
+                </div>
+                <span class="text-xs text-muted" style="margin-top: 0.35rem; display: block;">93 / 147 classes · Semester 3</span>
+              </div>
+
+              <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <span class="text-xs text-muted font-bold uppercase">Earned Credits</span>
+                <p class="font-bold font-mono" style="font-size: 1.25rem; color: var(--text-primary); margin: 0.25rem 0 0;">
+                  44 / 160 Credits
+                </p>
+                <span class="text-xs text-muted">22 Credits registered in 3rd Semester</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Edit profile modal -->
+  <div class="modal-backdrop" id="editProfileModal" role="dialog" aria-modal="true" aria-labelledby="editProfileTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="editProfileTitle">Edit Profile Information</h3>
+        <button type="button" class="modal-close" data-modal-dismiss aria-label="Close modal">×</button>
+      </div>
+      <form id="profileEditForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="editProfileName">Full Name</label>
+            <input type="text" id="editProfileName" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="editProfileEmail">Email Address</label>
+            <input type="email" id="editProfileEmail" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="editProfileMobile">Mobile Number</label>
+            <input type="tel" id="editProfileMobile" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="editProfileBio">Bio / Profile Summary</label>
+            <textarea id="editProfileBio" class="form-textarea" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close" data-modal-dismiss>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/profile.js"></script>
+</body>
+</html>

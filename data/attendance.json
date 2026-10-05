@@ -1,0 +1,84 @@
+[
+  {
+    "code": "CEUE203",
+    "shortName": "OOP",
+    "name": "Object Oriented Programming",
+    "lecture": {
+      "present": 16,
+      "total": 22,
+      "percentage": 72
+    },
+    "lab": {
+      "present": 1,
+      "total": 7,
+      "percentage": 14
+    }
+  },
+  {
+    "code": "CSUC201",
+    "shortName": "FDSA",
+    "name": "Fundamentals of Data Structure and Algorithms",
+    "lecture": {
+      "present": 15,
+      "total": 21,
+      "percentage": 71
+    },
+    "lab": {
+      "present": 6,
+      "total": 11,
+      "percentage": 54
+    }
+  },
+  {
+    "code": "HSUV201",
+    "shortName": "CPI",
+    "name": "Creativity, Problem Solving and Innovation",
+    "lecture": {
+      "present": 10,
+      "total": 14,
+      "percentage": 71
+    },
+    "lab": null
+  },
+  {
+    "code": "ITUC201",
+    "shortName": "FCN",
+    "name": "Fundamentals of Computer Networks",
+    "lecture": {
+      "present": 24,
+      "total": 39,
+      "percentage": 61
+    },
+    "lab": {
+      "present": 6,
+      "total": 11,
+      "percentage": 54
+    }
+  },
+  {
+    "code": "ITUE203",
+    "shortName": "WDF",
+    "name": "Web Development Frameworks",
+    "lecture": {
+      "present": 9,
+      "total": 22,
+      "percentage": 40
+    },
+    "lab": {
+      "present": 9,
+      "total": 19,
+      "percentage": 47
+    }
+  },
+  {
+    "code": "MSUD203",
+    "shortName": "DM",
+    "name": "Discrete Mathematics",
+    "lecture": {
+      "present": 19,
+      "total": 29,
+      "percentage": 65
+    },
+    "lab": null
+  }
+]

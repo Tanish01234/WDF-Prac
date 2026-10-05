@@ -1,0 +1,246 @@
+/* Mobile drawer and overlays */
+.mobile-header {
+  display: none;
+  height: 64px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 110;
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Tablet: <=1199px */
+@media (max-width: 1199px) {
+  :root {
+    --sidebar-width: 230px;
+    --topbar-height: 64px;
+  }
+
+  .portal-content {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .topbar-search-box {
+    width: 240px;
+  }
+
+  .topbar-search-input:focus {
+    width: 280px;
+  }
+}
+
+/* Mobile: <=767px */
+@media (max-width: 767px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  /* Off-canvas sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    z-index: 150;
+    box-shadow: var(--shadow-lg);
+    transition: left var(--transition-base);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar-close-btn {
+    display: inline-flex !important;
+  }
+
+  .portal-layout {
+    flex-direction: column;
+  }
+
+  .topbar {
+    display: none; /* Mobile header replaces topbar for basic actions */
+  }
+
+  .portal-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-title-group h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Grid columns */
+  .grid-4, .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Public navbar */
+  .public-navbar {
+    padding: 0 1.25rem;
+    height: 64px;
+  }
+
+  .public-nav-links {
+    display: none;
+  }
+
+  .public-nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-medium);
+    padding: 1.25rem;
+    gap: 1rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .public-nav-cta {
+    display: none;
+  }
+
+  .public-nav-links.mobile-open .public-nav-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Public footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Modals */
+  .modal-dialog {
+    max-width: 100%;
+    margin: 1rem;
+  }
+
+  /* Toast notifications */
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .toast {
+    max-width: 100%;
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Form grid */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Table scroll */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* Stat cards */
+  .stat-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+}
+
+/* Small mobile: <=479px */
+@media (max-width: 479px) {
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.15rem; }
+
+  .btn {
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}

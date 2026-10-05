@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Portal Login — Student authentication gateway for CHARUSAT DEPSTAR Information Technology.">
+  <title>Student Sign In — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body class="login-layout">
+
+  <!-- Header -->
+  <header class="public-navbar" role="banner">
+    <a href="../index.html" class="brand-logo">
+      <div class="brand-icon">S</div>
+      <span>SYNORA</span>
+    </a>
+    <div class="flex items-center gap-1">
+      <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+      <a href="register.html" class="btn btn-primary btn-sm" style="margin-left: 0.5rem;">Register</a>
+      <a href="../index.html" class="btn btn-ghost btn-sm">Home</a>
+    </div>
+  </header>
+
+  <main class="login-container" id="mainContent">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="badge badge-accent" style="margin-bottom: 0.5rem;">Student Portal Gateway</span>
+        <h1>Welcome Back</h1>
+        <p>Sign in to access your dashboard, courses, and timetable.</p>
+      </div>
+
+      <form id="loginForm" onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+        <div class="form-group">
+          <label class="form-label" for="loginId">Student ID / University Email</label>
+          <input type="text" id="loginId" class="form-input" placeholder="e.g. 25DIT006" value="25DIT006" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">
+            <span>Password</span>
+            <a href="faq.html" class="text-xs text-muted">Forgot password?</a>
+          </label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" value="Password@123" required autocomplete="current-password">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-check">
+            <input type="checkbox" id="rememberMe" checked>
+            <span style="font-size: 0.875rem;">Remember my student ID on this computer</span>
+          </label>
+        </div>
+
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          <strong>Frontend Scope Notice:</strong> Server-side authentication, password hashing, and PHP session management belong to later practicals (Practicals 7–10). This form demonstrates frontend UI flow and redirects directly to the portal dashboard.
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+          Sign In to Portal →
+        </button>
+      </form>
+
+      <div class="auth-switch-link">
+        New student at DEPSTAR? <a href="register.html" class="font-bold">Register an Account</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="public-footer" style="margin-top: auto; padding: 2rem 0;">
+    <div class="container text-center text-xs text-muted">
+      © 2026 SYNORA Portal • CHARUSAT / DEPSTAR Information Technology Department
+    </div>
+  </footer>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

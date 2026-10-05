@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "WDF Practical 1–6 Continuous Evaluation Submission Deadline",
+    "category": "Academic",
+    "priority": "Urgent",
+    "date": "2026-09-28",
+    "department": "Information Technology",
+    "description": "All 3rd-semester B.Tech IT students must complete and submit code repositories for Practicals 1 through 6 before October 5, 2026."
+  },
+  {
+    "id": 2,
+    "title": "Revised Class Room Allocation for MSUD203 Discrete Mathematics",
+    "category": "Timetable",
+    "priority": "Important",
+    "date": "2026-09-25",
+    "department": "Mathematical Sciences",
+    "description": "Wednesday morning MSUD203 lecture will take place in Room 124 at 09:10 AM as indicated on the updated departmental schedule."
+  },
+  {
+    "id": 3,
+    "title": "Registration Open for Synora AI Innovation Hackathon 2026",
+    "category": "Event",
+    "priority": "Important",
+    "date": "2026-09-22",
+    "department": "DEPSTAR Tech Cell",
+    "description": "Team registrations for the flagship 24-hour campus hackathon close on October 2, 2026. Cash awards and internship tracks available."
+  },
+  {
+    "id": 4,
+    "title": "Notice Regarding Mid-Semester Theory & Practical Exam Schedule",
+    "category": "Examination",
+    "priority": "Important",
+    "date": "2026-09-18",
+    "department": "Examination Cell",
+    "description": "Mid-semester evaluations for Odd Term 2026–27 will commence from October 14, 2026. Detailed seating blueprints will be published next week."
+  },
+  {
+    "id": 5,
+    "title": "Maintenance Downtime: University Wi-Fi & Intranet Upgrade",
+    "category": "General",
+    "priority": "Normal",
+    "date": "2026-09-15",
+    "department": "IT Infrastructure Group",
+    "description": "Campus Wi-Fi connectivity will experience brief intermittent downtime on Sunday between 02:00 AM and 06:00 AM for optical backbone upgrades."
+  },
+  {
+    "id": 6,
+    "title": "Library Book Return & Digital Repository Orientation Session",
+    "category": "Academic",
+    "priority": "Normal",
+    "date": "2026-09-10",
+    "department": "Central Library",
+    "description": "Students are reminded to renew issued textbooks on time via the online portal. An orientation on IEEE Xplore access is scheduled on Friday."
+  },
+  {
+    "id": 7,
+    "title": "Call for Student Volunteers: Annual Cultural Fest Vrund 2026",
+    "category": "Cultural",
+    "priority": "Normal",
+    "date": "2026-09-08",
+    "department": "Student Affairs Council",
+    "description": "Volunteers needed for stage coordination, event logistics, and technical production for Vrund 2026. Interested students apply at student desk."
+  },
+  {
+    "id": 8,
+    "title": "Blood Donation Camp & Community Health Drive",
+    "category": "General",
+    "priority": "Normal",
+    "date": "2026-09-02",
+    "department": "NSS Unit CHARUSAT",
+    "description": "Join the voluntary blood donation camp organized at the Health Center on October 1st from 09:30 AM to 03:30 PM."
+  },
+  {
+    "id": 9,
+    "title": "Google Developer Student Club (GDSC) Orientation Meet",
+    "category": "Event",
+    "priority": "Normal",
+    "date": "2026-08-28",
+    "department": "DEPSTAR GDSC",
+    "description": "Welcome session for incoming core team and student members. Discover upcoming tracks in cloud, AI, web development, and flutter."
+  },
+  {
+    "id": 10,
+    "title": "Mandatory Student Counseling & Mentorship Allocation",
+    "category": "Academic",
+    "priority": "Important",
+    "date": "2026-08-20",
+    "department": "IT Mentorship Committee",
+    "description": "Weekly counselling sessions will take place every Tuesday and Wednesday at 01:10 PM in rooms 123 and 125 with designated faculty mentors."
+  }
+]
