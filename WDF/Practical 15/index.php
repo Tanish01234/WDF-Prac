@@ -82,7 +82,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Project Initiation & Sitemap</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Requirements, 15-page sitemap, responsive wireframes, Git setup, and viva notes.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_01_Project_Initiation/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P1 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%201/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P1 Demo →</a></div>
         </div>
 
         <!-- P2 -->
@@ -92,7 +92,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Semantic HTML5 Structure</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">13 linked semantic HTML5 pages, skip-to-content, and WCAG accessibility.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_02_Semantic_HTML5/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P2 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%202/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P2 Demo →</a></div>
         </div>
 
         <!-- P3 -->
@@ -102,7 +102,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Responsive UI CSS Grid & Flexbox</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Mobile-first layouts tested across 375px, 768px, and 1440px viewports.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_03_Responsive_UI_CSS/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P3 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%203/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P3 Demo →</a></div>
         </div>
 
         <!-- P4 -->
@@ -112,7 +112,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">JavaScript DOM & Events</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Collapsible FAQ, image slider, modal dialog, and theme switcher with localStorage.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_04_JavaScript_DOM_Events/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P4 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%204/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P4 Demo →</a></div>
         </div>
 
         <!-- P5 -->
@@ -122,7 +122,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Registration Form Regex Validation</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Real-time input constraints, password strength meter, and error indicators.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_05_Registration_Validation/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P5 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%205/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P5 Demo →</a></div>
         </div>
 
         <!-- P6 -->
@@ -132,7 +132,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">JSON Fetch, Search & Filter</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Dynamic rendering of events, students, and FAQs JSON datasets (16 items each).</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_06_JSON_Fetch_Search_Filter/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P6 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%206/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P6 Demo →</a></div>
         </div>
 
         <!-- P7 -->
@@ -142,7 +142,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">PHP Form Processing & CSV/JSON</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Server-side validation, sanitization, and concurrent write file locking (flock).</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_07_PHP_Form_CSV_JSON/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P7 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%207/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P7 Demo →</a></div>
         </div>
 
         <!-- P8 -->
@@ -152,7 +152,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">MySQL Schema & Connectivity</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Normalized 3NF relational schema, seed data, and dual PDO/MySQLi connection tests.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_08_MySQL_Schema_Connectivity/connection-test.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P8 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%208/connection-test.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P8 Demo →</a></div>
         </div>
 
         <!-- P9 -->
@@ -162,7 +162,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Secure Registration & Password Hash</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">MySQL prepared statements, duplicate checks, and Bcrypt password hashing.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_09_Secure_Registration/register.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P9 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%209/register.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P9 Demo →</a></div>
         </div>
 
         <!-- P10 -->
@@ -172,7 +172,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Login, Sessions & RBAC</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">password_verify(), session fixation defense, student/admin roles, and 30-min timeout.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_10_Login_Sessions_RBAC/login.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P10 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%2010/login.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P10 Demo →</a></div>
         </div>
 
         <!-- P11 -->
@@ -182,7 +182,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Student Management CRUD</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">MySQLi prepared statements, search, batch filter, and 22+ seeded student records.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_11_Student_Management_CRUD/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P11 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%2011/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P11 Demo →</a></div>
         </div>
 
         <!-- P12 -->
@@ -192,7 +192,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Event Management & Poster Upload</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Server-side MIME validation (finfo), 2MB limit, unique hashes, and .htaccess lock.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_12_Event_Management_Upload/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P12 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%2012/index.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P12 Demo →</a></div>
         </div>
 
         <!-- P13 -->
@@ -202,7 +202,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">PHP JSON API & AJAX CRUD</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">RESTful endpoints (GET/POST/PUT/DELETE) and async DOM updates without reload.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_13_PHP_JSON_API_AJAX_CRUD/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P13 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%2013/index.html" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P13 Demo →</a></div>
         </div>
 
         <!-- P14 -->
@@ -212,7 +212,7 @@
             <h4 style="font-size: 1.05rem; margin: 0.4rem 0;">Admin Dashboard & Audit Log</h4>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">Real SQL aggregate metrics and non-repudiation security audit log stream.</p>
           </div>
-          <div style="margin-top: 1rem;"><a href="../Practical_14_Admin_Dashboard_RBAC_Audit/admin-dashboard.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P14 Demo →</a></div>
+          <div style="margin-top: 1rem;"><a href="../Practical%2014/admin-dashboard.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Launch P14 Demo →</a></div>
         </div>
 
         <!-- P15 -->

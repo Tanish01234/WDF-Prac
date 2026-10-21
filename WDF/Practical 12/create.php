@@ -1,6 +1,6 @@
 <?php
 // Practical 12 — Create Campus Event with Validated Poster Upload
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 
 $error = null;
 

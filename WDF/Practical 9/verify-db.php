@@ -1,6 +1,6 @@
 <?php
 // Practical 09 — Verification Tool Demonstrating Password Hashing Integrity
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 
 $pdo = getDbConnection();
 $users = $pdo->query('SELECT id, username, email, password_hash, role, status, created_at FROM users ORDER BY id DESC LIMIT 10')->fetchAll();

@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../../Practical 8/db.php';
 
 function checkAdminRole() {
     // If user is logged in via main portal session or p10 session, accept admin

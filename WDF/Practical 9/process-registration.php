@@ -4,7 +4,7 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);

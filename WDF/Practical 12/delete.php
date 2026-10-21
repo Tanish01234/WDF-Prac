@@ -1,6 +1,6 @@
 <?php
 // Practical 12 — Delete Event and Associated Poster File
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 $pdo = getDbConnection();
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

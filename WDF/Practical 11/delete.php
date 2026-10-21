@@ -1,6 +1,6 @@
 <?php
 // Practical 11 — Delete Student Record
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 $mysqli = getMysqliConnection();
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

@@ -1,6 +1,6 @@
 <?php
 // Practical 12 — Event Management Listing & Poster Display
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 $pdo = getDbConnection();
 
 $events = $pdo->query('SELECT * FROM events ORDER BY event_date ASC')->fetchAll();

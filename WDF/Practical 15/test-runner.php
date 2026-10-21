@@ -2,7 +2,7 @@
 // Practical 15 — Automated End-to-End Test Runner for all 15 Practicals
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/../Practical_08_MySQL_Schema_Connectivity/db.php';
+require_once __DIR__ . '/../Practical 8/db.php';
 
 $tests = [];
 
@@ -18,34 +18,34 @@ function recordTest(&$tests, $id, $practical, $name, $status, $details = '') {
 
 try {
     // P1: Project structure
-    $p1Exists = file_exists(__DIR__ . '/../Practical_01_Project_Initiation/index.html');
+    $p1Exists = file_exists(__DIR__ . '/../Practical 1/index.html');
     recordTest($tests, 'T01', 'P1', 'Project Initiation HTML Architecture Present', $p1Exists);
 
     // P2: Semantic HTML pages count
-    $p2Files = glob(__DIR__ . '/../Practical_02_Semantic_HTML5/*.html');
+    $p2Files = glob(__DIR__ . '/../Practical 2/*.html');
     recordTest($tests, 'T02', 'P2', 'Semantic HTML5 Pages (>= 10 pages)', count($p2Files) >= 10, count($p2Files) . ' pages verified');
 
     // P3: Responsive CSS bundle
-    $p3Css = file_exists(__DIR__ . '/../Practical_03_Responsive_UI_CSS/css/responsive.css');
+    $p3Css = file_exists(__DIR__ . '/../Practical 3/css/responsive.css');
     recordTest($tests, 'T03', 'P3', 'Responsive CSS Media Queries & Grid Architecture', $p3Css);
 
     // P4: Interactive JS widgets
-    $p4Js = file_exists(__DIR__ . '/../Practical_04_JavaScript_DOM_Events/js/interactivity.js');
+    $p4Js = file_exists(__DIR__ . '/../Practical 4/js/interactivity.js');
     recordTest($tests, 'T04', 'P4', 'JavaScript DOM Manipulation & Event Handlers', $p4Js);
 
     // P5: Registration validation JS
-    $p5Js = file_exists(__DIR__ . '/../Practical_05_Registration_Validation/js/validation.js');
+    $p5Js = file_exists(__DIR__ . '/../Practical 5/js/validation.js');
     recordTest($tests, 'T05', 'P5', 'Registration Form Client-Side Regex Validation', $p5Js);
 
     // P6: JSON datasets (>= 15 items each)
-    $eventsJson = json_decode(file_get_contents(__DIR__ . '/../Practical_06_JSON_Fetch_Search_Filter/data/events.json'), true);
-    $studentsJson = json_decode(file_get_contents(__DIR__ . '/../Practical_06_JSON_Fetch_Search_Filter/data/students.json'), true);
-    $faqsJson = json_decode(file_get_contents(__DIR__ . '/../Practical_06_JSON_Fetch_Search_Filter/data/faqs.json'), true);
+    $eventsJson = json_decode(file_get_contents(__DIR__ . '/../Practical 6/data/events.json'), true);
+    $studentsJson = json_decode(file_get_contents(__DIR__ . '/../Practical 6/data/students.json'), true);
+    $faqsJson = json_decode(file_get_contents(__DIR__ . '/../Practical 6/data/faqs.json'), true);
     $jsonOk = count($eventsJson) >= 15 && count($studentsJson) >= 15 && count($faqsJson) >= 15;
     recordTest($tests, 'T06', 'P6', 'JSON Datasets (>= 15 records each)', $jsonOk, 'Events: ' . count($eventsJson) . ', Students: ' . count($studentsJson) . ', FAQs: ' . count($faqsJson));
 
     // P7: CSV storage append test
-    $csvPath = __DIR__ . '/../Practical_07_PHP_Form_CSV_JSON/storage/registrations.csv';
+    $csvPath = __DIR__ . '/../Practical 7/storage/registrations.csv';
     $csvOk = file_exists($csvPath) && filesize($csvPath) > 0;
     recordTest($tests, 'T07', 'P7', 'PHP Server Form Processing & CSV File Storage', $csvOk);
 
@@ -60,7 +60,7 @@ try {
     recordTest($tests, 'T09', 'P9', 'Database Bcrypt Password Hashing & Timing-Safe Verify', $hashOk);
 
     // P10: Session Security Configuration
-    require_once __DIR__ . '/../Practical_10_Login_Sessions_RBAC/auth.php';
+    require_once __DIR__ . '/../Practical 10/auth.php';
     $cookieHttponly = (bool)ini_get('session.cookie_httponly');
     recordTest($tests, 'T10', 'P10', 'Secure Session Cookie Flags (HttpOnly Enabled)', $cookieHttponly);
 
@@ -69,11 +69,11 @@ try {
     recordTest($tests, 'T11', 'P11', 'Student Directory Database Count (>= 20 records)', $studCount >= 20, "Total: {$studCount} students");
 
     // P12: Event Upload Security (.htaccess lock)
-    $htaccess = file_exists(__DIR__ . '/../Practical_12_Event_Management_Upload/uploads/.htaccess');
+    $htaccess = file_exists(__DIR__ . '/../Practical 12/uploads/.htaccess');
     recordTest($tests, 'T12', 'P12', 'Upload Security & Script Execution Block (.htaccess)', $htaccess);
 
     // P13: RESTful JSON API
-    $apiExists = file_exists(__DIR__ . '/../Practical_13_PHP_JSON_API_AJAX_CRUD/api/students.php');
+    $apiExists = file_exists(__DIR__ . '/../Practical 13/api/students.php');
     recordTest($tests, 'T13', 'P13', 'RESTful PHP JSON API & Asynchronous Fetch CRUD', $apiExists);
 
     // P14: Admin Dashboard & Audit Logs
