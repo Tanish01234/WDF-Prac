@@ -29,37 +29,49 @@
   <main class="login-container" id="mainContent">
     <div class="login-card">
       <div class="login-header">
-        <span class="badge badge-accent" style="margin-bottom: 0.5rem;">Student Portal Gateway</span>
+        <span class="badge badge-accent" style="margin-bottom: 0.5rem;">Practical 10 Authentication</span>
         <h1>Welcome Back</h1>
         <p>Sign in to access your dashboard, courses, and timetable.</p>
       </div>
 
-      <form id="loginForm" onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+      <div class="alert alert-success" id="loginSuccessBanner" style="display: none; margin-bottom: 1.25rem;"></div>
+      <div class="alert alert-danger" id="loginErrorBanner" style="display: none; margin-bottom: 1.25rem;"></div>
+
+      <!-- Quick Demo Credentials Helper for Examiners/Viva -->
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem; font-size: 0.8rem;">
+        <div style="font-weight: 600; margin-bottom: 0.4rem; color: var(--text-primary);">Test Credentials (Click to fill):</div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="fillCreds('25dit006@charusat.edu.in', 'Student@2026')">
+            👨‍🎓 Student: 25DIT006
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="fillCreds('admin@charusat.edu.in', 'Admin@2026')">
+            🛡️ Admin: Dr. Parth Goel
+          </button>
+        </div>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)">
         <div class="form-group">
-          <label class="form-label" for="loginId">Student ID / University Email</label>
-          <input type="text" id="loginId" class="form-input" placeholder="e.g. 25DIT006" value="25DIT006" required autocomplete="username">
+          <label class="form-label" for="loginId">Student Roll No / University Email <span class="required">*</span></label>
+          <input type="text" id="loginId" class="form-input" placeholder="e.g. 25DIT006 or student@charusat.edu.in" value="25dit006@charusat.edu.in" required autocomplete="username">
         </div>
 
         <div class="form-group">
           <label class="form-label" for="loginPassword">
-            <span>Password</span>
-            <a href="faq.html" class="text-xs text-muted">Forgot password?</a>
+            <span>Password <span class="required">*</span></span>
+            <a href="faq.html" class="text-xs text-muted">Need help?</a>
           </label>
-          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" value="Password@123" required autocomplete="current-password">
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" value="Student@2026" required autocomplete="current-password">
         </div>
 
-        <div class="form-group" style="margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
           <label class="form-check">
             <input type="checkbox" id="rememberMe" checked>
-            <span style="font-size: 0.875rem;">Remember my student ID on this computer</span>
+            <span style="font-size: 0.875rem;">Remember my session on this computer</span>
           </label>
         </div>
 
-        <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-          <strong>Frontend Scope Notice:</strong> Server-side authentication, password hashing, and PHP session management belong to later practicals (Practicals 7–10). This form demonstrates frontend UI flow and redirects directly to the portal dashboard.
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+        <button type="submit" class="btn btn-primary btn-lg" id="loginSubmitBtn" style="width: 100%;">
           Sign In to Portal →
         </button>
       </form>
@@ -69,6 +81,78 @@
       </div>
     </div>
   </main>
+
+  <script>
+    function fillCreds(id, pass) {
+      document.getElementById('loginId').value = id;
+      document.getElementById('loginPassword').value = pass;
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('loginId').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      const successBox = document.getElementById('loginSuccessBanner');
+      const errorBox = document.getElementById('loginErrorBanner');
+      const submitBtn = document.getElementById('loginSubmitBtn');
+
+      successBox.style.display = 'none';
+      errorBox.style.display = 'none';
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Verifying Credentials...';
+
+      try {
+        const res = await fetch('../backend/auth/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identifier, password })
+        });
+        const data = await res.json();
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Sign In to Portal →';
+
+        if (data.success) {
+          successBox.innerText = data.message + ' Redirecting to ' + data.redirect + '...';
+          successBox.style.display = 'block';
+          setTimeout(() => {
+            window.location.href = data.redirect;
+          }, 800);
+        } else {
+          errorBox.innerText = data.message || 'Authentication failed.';
+          errorBox.style.display = 'block';
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Sign In to Portal →';
+        errorBox.innerText = 'Unable to connect to authentication backend. Please check PHP/MySQL service.';
+        errorBox.style.display = 'block';
+      }
+    }
+
+    // Check query params for notification flags
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const successBox = document.getElementById('loginSuccessBanner');
+      const errorBox = document.getElementById('loginErrorBanner');
+
+      if (params.get('registered') === '1') {
+        successBox.innerText = 'Registration successful! Your account is created in MySQL. Please sign in below.';
+        successBox.style.display = 'block';
+      } else if (params.get('logged_out') === '1') {
+        successBox.innerText = 'You have logged out successfully. Your session was safely destroyed.';
+        successBox.style.display = 'block';
+      } else if (params.get('error') === 'admin_required') {
+        errorBox.innerText = 'Administrator access required. Please sign in with an administrator account.';
+        errorBox.style.display = 'block';
+      } else if (params.get('error') === 'unauthorized') {
+        errorBox.innerText = 'Please sign in to access that protected portal area.';
+        errorBox.style.display = 'block';
+      }
+    });
+  </script>
 
   <footer class="public-footer" style="margin-top: auto; padding: 2rem 0;">
     <div class="container text-center text-xs text-muted">

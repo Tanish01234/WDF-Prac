@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Student Registration — Practical 05 Frontend Form Validation with Regex and Password Strength Meter.">
+  <title>Practical 05: Registration Form with Frontend Validation</title>
+  <link rel="stylesheet" href="css/registration.css">
+  <style>
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .register-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      max-width: 640px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="register-card" id="mainContent">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span class="badge badge-accent" style="margin-bottom: 0.5rem;">Practical 05 Demonstration</span>
+      <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;">Student Registration Form</h1>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">
+        Client-Side Regex Form Validation, Real-Time Feedback & Password Strength Indicator
+      </p>
+    </div>
+
+    <!-- Success Feedback Alert -->
+    <div class="alert alert-success" id="regSuccessBanner" style="display: none; margin-bottom: 1.5rem;" role="alert">
+      <div>
+        <h4 style="font-size: 1rem; font-weight: 700;">Validation Passed!</h4>
+        <p style="font-size: 0.85rem; margin-top: 0.25rem;">
+          All input fields strictly satisfied their regex criteria. Form payload is valid for client-side processing.
+        </p>
+      </div>
+    </div>
+
+    <form id="registrationForm" novalidate>
+      <!-- Full Name -->
+      <div class="form-group">
+        <label class="form-label" for="regName">
+          <span>Full Name <span class="required">*</span></span>
+          <span class="text-xs text-muted">Letters & spaces only (3–50 chars)</span>
+        </label>
+        <input type="text" id="regName" name="name" class="form-input" placeholder="e.g. Tanis Bedia" required autocomplete="name">
+        <div class="form-feedback" id="regNameFeedback"></div>
+      </div>
+
+      <!-- Email & Mobile Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="regEmail">
+            <span>University Email <span class="required">*</span></span>
+            <span class="text-xs text-muted">Format: user@domain.com</span>
+          </label>
+          <input type="email" id="regEmail" name="email" class="form-input" placeholder="25dit006@charusat.edu.in" required autocomplete="email">
+          <div class="form-feedback" id="regEmailFeedback"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regMobile">
+            <span>Mobile Number <span class="required">*</span></span>
+            <span class="text-xs text-muted">10-Digit Indian format (starts 6-9)</span>
+          </label>
+          <input type="tel" id="regMobile" name="mobile" class="form-input" placeholder="9876543210" required autocomplete="tel">
+          <div class="form-feedback" id="regMobileFeedback"></div>
+        </div>
+      </div>
+
+      <!-- Program & Academic Year Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="regCourse">Program / Branch <span class="required">*</span></label>
+          <select id="regCourse" name="course" class="form-select" required>
+            <option value="">Select Academic Program</option>
+            <option value="B.Tech IT" selected>B.Tech Information Technology</option>
+            <option value="B.Tech CSE">B.Tech Computer Science & Eng</option>
+            <option value="B.Tech CE">B.Tech Computer Engineering</option>
+          </select>
+          <div class="form-feedback" id="regCourseFeedback"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regYear">Academic Year <span class="required">*</span></label>
+          <select id="regYear" name="year" class="form-select" required>
+            <option value="">Select Current Year</option>
+            <option value="1">1st Year (Sem 1 & 2)</option>
+            <option value="2" selected>2nd Year (Sem 3 & 4)</option>
+            <option value="3">3rd Year (Sem 5 & 6)</option>
+            <option value="4">4th Year (Sem 7 & 8)</option>
+          </select>
+          <div class="form-feedback" id="regYearFeedback"></div>
+        </div>
+      </div>
+
+      <!-- Gender Selection -->
+      <div class="form-group">
+        <label class="form-label">Gender <span class="required">*</span></label>
+        <div class="radio-group" role="radiogroup" aria-label="Gender Selection" style="display: flex; gap: 1.5rem; margin-top: 0.35rem;">
+          <label class="form-check" style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="radio" name="gender" value="Male" checked>
+            <span>Male</span>
+          </label>
+          <label class="form-check" style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="radio" name="gender" value="Female">
+            <span>Female</span>
+          </label>
+          <label class="form-check" style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+            <input type="radio" name="gender" value="Other">
+            <span>Other</span>
+          </label>
+        </div>
+        <div class="form-feedback" id="genderFeedback"></div>
+      </div>
+
+      <!-- Password & Strength Meter -->
+      <div class="form-group">
+        <label class="form-label" for="regPassword">
+          <span>Password <span class="required">*</span></span>
+          <span class="text-xs text-muted">Min 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 symbol</span>
+        </label>
+        <input type="password" id="regPassword" name="password" class="form-input" placeholder="••••••••" required autocomplete="new-password">
+        
+        <!-- Strength Meter Widget -->
+        <div class="password-meter" style="margin-top: 0.6rem;">
+          <div class="meter-track" style="height: 6px; background: var(--border-medium); border-radius: 3px; overflow: hidden;">
+            <div class="meter-fill" id="passMeterFill" style="height: 100%; width: 0%; transition: width 0.3s, background 0.3s;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 0.35rem; font-size: 0.75rem; color: var(--text-muted);">
+            <span>Strength: <strong class="meter-status" id="passMeterText" style="color: var(--text-primary);">None</strong></span>
+            <span>A-Z, a-z, 0-9, @#$</span>
+          </div>
+        </div>
+        <div class="form-feedback" id="regPasswordFeedback"></div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label class="form-label" for="regConfirmPassword">Confirm Password <span class="required">*</span></label>
+        <input type="password" id="regConfirmPassword" name="confirmPassword" class="form-input" placeholder="••••••••" required autocomplete="new-password">
+        <div class="form-feedback" id="regConfirmPasswordFeedback"></div>
+      </div>
+
+      <!-- Terms Checkbox -->
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label class="form-check" style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+          <input type="checkbox" id="regTerms" name="terms" value="1" required style="margin-top: 0.2rem;">
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">
+            I agree to the CHARUSAT DEPSTAR IT academic guidelines, code of conduct, and lab regulations. <span class="required">*</span>
+          </span>
+        </label>
+        <div class="form-feedback" id="regTermsFeedback"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+        Validate & Register Student Account
+      </button>
+    </form>
+  </main>
+
+  <script src="js/validation.js"></script>
+</body>
+</html>

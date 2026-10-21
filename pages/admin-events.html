@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Event Management — Practical 12 & 13 Event CRUD with Poster Upload & MIME Validation.">
+  <title>Manage Events — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="../js/theme.js"></script>
+  <style>
+    .admin-badge {
+      background: rgba(220, 38, 38, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .admin-event-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .admin-event-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .event-poster-thumb {
+      height: 140px;
+      width: 100%;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .event-poster-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 600px;
+      padding: 2rem;
+      box-shadow: var(--shadow-xl);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Admin Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
+          <span>SYNORA <span style="font-size: 0.7rem; color: #ef4444; font-weight: 700;">ADMIN</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Administration</div>
+          <div class="nav-item">
+            <a href="admin-dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Overview</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-students.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Manage Students</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-events.html" class="nav-link active">
+              <span class="nav-icon">📅</span>
+              <span>Manage Events</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Portal Views</div>
+          <div class="nav-item">
+            <a href="events.html" class="nav-link">
+              <span class="nav-icon">🚀</span>
+              <span>Public Events Page</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">🎓</span>
+              <span>Student Dashboard</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="../backend/auth/logout.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Sign Out</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="portal-main">
+      <header class="portal-topbar" role="banner">
+        <div class="topbar-left">
+          <button type="button" class="btn-icon mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+          <div class="topbar-context-badge">
+            <span class="admin-badge">Admin Control Center</span>
+            <span class="text-xs text-muted" style="margin-left: 0.5rem;">Practicals 12 & 13 — Event CRUD & Poster Upload</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openAddEventModal()">+ Create New Event</button>
+        </div>
+      </header>
+
+      <main class="portal-content" id="mainContent">
+        <!-- Page Header -->
+        <div class="dash-page-header">
+          <div>
+            <h1 class="dash-greeting-title">Campus Event Management</h1>
+            <p class="text-sm text-muted">
+              Publish workshops, hackathons, and technical symposiums with secure poster upload validation (MIME check & max 2MB).
+            </p>
+          </div>
+          <div class="dash-quick-links">
+            <select id="eventCatFilter" class="form-select" onchange="loadEvents()">
+              <option value="all">All Categories</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Hackathon">Hackathon</option>
+              <option value="Seminar">Seminar</option>
+              <option value="Academic">Academic</option>
+              <option value="Cultural">Cultural</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="event-grid" id="eventsGridContainer">
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
+            Loading events from MySQL database...
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add / Edit Event Modal -->
+  <div class="modal-backdrop" id="eventModal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 id="eventModalTitle" style="font-size: 1.25rem;">Create Campus Event</h3>
+        <button type="button" class="btn-icon" onclick="closeEventModal()">✕</button>
+      </div>
+
+      <div class="alert alert-danger" id="eventModalAlert" style="display: none; margin-bottom: 1rem;"></div>
+
+      <form id="eventForm" onsubmit="saveEvent(event)">
+        <input type="hidden" id="eventId" name="id" value="">
+
+        <div class="form-group">
+          <label class="form-label" for="evTitle">Event Title <span class="required">*</span></label>
+          <input type="text" id="evTitle" name="title" class="form-input" placeholder="e.g. Modern Web Architectures Workshop" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="evCategory">Category <span class="required">*</span></label>
+            <select id="evCategory" name="category" class="form-select" required>
+              <option value="Workshop">Workshop</option>
+              <option value="Hackathon">Hackathon</option>
+              <option value="Seminar">Seminar</option>
+              <option value="Academic">Academic</option>
+              <option value="Cultural">Cultural</option>
+              <option value="Sports">Sports</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="evDate">Event Date <span class="required">*</span></label>
+            <input type="date" id="evDate" name="event_date" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="evTime">Time Slot <span class="required">*</span></label>
+            <input type="text" id="evTime" name="time" class="form-input" value="10:00 AM – 01:00 PM" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="evLocation">Campus Venue <span class="required">*</span></label>
+            <input type="text" id="evLocation" name="location" class="form-input" placeholder="DEPSTAR Lab 208" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="evOrganizer">Organizer</label>
+            <input type="text" id="evOrganizer" name="organizer" class="form-input" value="Department of Information Technology">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="evCapacity">Capacity</label>
+            <input type="number" id="evCapacity" name="capacity" class="form-input" value="50" min="1" max="1000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="evStatus">Registration Status</label>
+          <select id="evStatus" name="status" class="form-select">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="evDescription">Event Description <span class="required">*</span></label>
+          <textarea id="evDescription" name="description" class="form-textarea" rows="3" placeholder="Provide full syllabus or workshop details..." required></textarea>
+        </div>
+
+        <!-- Poster Upload with MIME validation (Practical 12) -->
+        <div class="form-group">
+          <label class="form-label" for="evPoster">
+            <span>Event Poster Image</span>
+            <span class="text-xs text-muted">JPEG, PNG, or WebP (Max 2MB)</span>
+          </label>
+          <input type="file" id="evPoster" name="poster" class="form-input" accept="image/png,image/jpeg,image/webp">
+          <div class="text-xs text-muted" style="margin-top: 0.25rem;">
+            Files undergo server-side MIME type verification with finfo (executables and disguised scripts strictly blocked).
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeEventModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveEventBtn">Publish Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script>
+    async function loadEvents() {
+      const category = document.getElementById('eventCatFilter').value;
+      const url = new URL('../backend/api/events.php', window.location.href);
+      if (category !== 'all') url.searchParams.set('category', category);
+
+      try {
+        const res = await fetch(url);
+        if (res.status === 401 || res.status === 403) {
+          window.location.href = 'login.html?error=admin_required';
+          return;
+        }
+        const json = await res.json();
+        if (!json.success) {
+          console.error('Events error:', json.message);
+          return;
+        }
+        renderEvents(json.data);
+      } catch (e) {
+        console.error('Failed to load events:', e);
+      }
+    }
+
+    function renderEvents(events) {
+      const container = document.getElementById('eventsGridContainer');
+      if (!events || events.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">No campus events found.</div>';
+        return;
+      }
+
+      container.innerHTML = events.map(ev => {
+        const posterImg = ev.poster_url 
+          ? `<img src="../${escapeHtml(ev.poster_url)}" alt="${escapeHtml(ev.title)} Poster" onerror="this.src='../assets/images/workshop.svg'">`
+          : '<div style="color: var(--text-muted); font-size: 2rem;">📅</div>';
+
+        return `
+          <div class="admin-event-card">
+            <div class="event-poster-thumb">
+              ${posterImg}
+              <span class="badge ${ev.status === 'Open' ? 'badge-success' : 'badge-accent'}" style="position: absolute; top: 0.75rem; right: 0.75rem;">
+                ${escapeHtml(ev.status)}
+              </span>
+            </div>
+            <div style="padding: 1.25rem; display: flex; flex-direction: column; flex: 1;">
+              <div class="badge badge-accent text-xs" style="align-self: flex-start; margin-bottom: 0.5rem;">${escapeHtml(ev.category)}</div>
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; line-height: 1.3;">${escapeHtml(ev.title)}</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                ${escapeHtml(ev.description)}
+              </p>
+
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.25rem;">
+                <div>📍 ${escapeHtml(ev.location)}</div>
+                <div>🗓️ ${new Date(ev.event_date).toLocaleDateString()} • ${escapeHtml(ev.time)}</div>
+                <div>👥 ${ev.registered_count || 0} registered / ${ev.capacity} capacity</div>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+                <button type="button" class="btn btn-secondary btn-sm" style="flex: 1;" onclick="openEditEventModal(${ev.id})">Edit</button>
+                <button type="button" class="btn btn-ghost btn-sm" style="color: #ef4444;" onclick="deleteEvent(${ev.id}, '${escapeHtml(ev.title)}')">Delete</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openAddEventModal() {
+      document.getElementById('eventModalTitle').innerText = 'Create Campus Event';
+      document.getElementById('eventId').value = '';
+      document.getElementById('eventForm').reset();
+      document.getElementById('eventModalAlert').style.display = 'none';
+      document.getElementById('eventModal').classList.add('active');
+    }
+
+    async function openEditEventModal(id) {
+      try {
+        const res = await fetch(`../backend/api/events.php?id=${id}`);
+        const json = await res.json();
+        if (!json.success || !json.data) {
+          alert('Could not fetch event.');
+          return;
+        }
+        const ev = json.data;
+        document.getElementById('eventModalTitle').innerText = `Edit Event — ${ev.title}`;
+        document.getElementById('eventId').value = ev.id;
+        document.getElementById('evTitle').value = ev.title;
+        document.getElementById('evCategory').value = ev.category;
+        document.getElementById('evDate').value = ev.event_date;
+        document.getElementById('evTime').value = ev.time;
+        document.getElementById('evLocation').value = ev.location;
+        document.getElementById('evOrganizer').value = ev.organizer;
+        document.getElementById('evCapacity').value = ev.capacity;
+        document.getElementById('evStatus').value = ev.status;
+        document.getElementById('evDescription').value = ev.description;
+        document.getElementById('eventModalAlert').style.display = 'none';
+        document.getElementById('eventModal').classList.add('active');
+      } catch (e) {
+        alert('Failed to load event data.');
+      }
+    }
+
+    function closeEventModal() {
+      document.getElementById('eventModal').classList.remove('active');
+    }
+
+    async function saveEvent(e) {
+      e.preventDefault();
+      const form = document.getElementById('eventForm');
+      const formData = new FormData(form);
+      const isEdit = Boolean(document.getElementById('eventId').value);
+
+      const btn = document.getElementById('saveEventBtn');
+      btn.disabled = true;
+      btn.innerText = 'Uploading & Saving...';
+
+      try {
+        const endpoint = isEdit ? `../backend/api/events.php?id=${document.getElementById('eventId').value}` : '../backend/api/events.php';
+        if (isEdit) {
+          formData.append('_method', 'PUT');
+        }
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: formData
+        });
+        const json = await res.json();
+
+        btn.disabled = false;
+        btn.innerText = 'Publish Event';
+
+        if (json.success) {
+          closeEventModal();
+          loadEvents();
+        } else {
+          const alertBox = document.getElementById('eventModalAlert');
+          alertBox.innerText = json.message || 'Error saving event.';
+          alertBox.style.display = 'block';
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Publish Event';
+        alert('Communication error with events API.');
+      }
+    }
+
+    async function deleteEvent(id, title) {
+      if (!confirm(`Are you sure you want to delete the event "${title}"?`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch('../backend/api/events.php', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        const json = await res.json();
+        if (json.success) {
+          loadEvents();
+        } else {
+          alert(json.message || 'Failed to delete event.');
+        }
+      } catch (e) {
+        alert('Server communication error.');
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadEvents();
+    });
+  </script>
+</body>
+</html>

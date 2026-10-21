@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Portal Administrator Dashboard — Practical 14 RBAC, Live MySQL Aggregates & Audit Log Stream.">
+  <title>Admin Dashboard — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="../js/theme.js"></script>
+  <style>
+    .admin-badge {
+      background: rgba(220, 38, 38, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .audit-table th, .audit-table td {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+    .audit-action-tag {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-layout" id="dashboardRoot">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Admin Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
+          <span>SYNORA <span style="font-size: 0.7rem; color: #ef4444; font-weight: 700;">ADMIN</span></span>
+        </a>
+        <button type="button" class="btn-icon sidebar-close-btn" aria-label="Close sidebar" style="display: none;">✕</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Administration</div>
+          <div class="nav-item">
+            <a href="admin-dashboard.html" class="nav-link active">
+              <span class="nav-icon">📊</span>
+              <span>Overview</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-students.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Manage Students</span>
+              <span class="nav-badge-count" id="navStudentCount">21</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-events.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Manage Events</span>
+              <span class="nav-badge-count" id="navEventCount">8</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Portal Views</div>
+          <div class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">🎓</span>
+              <span>Student Dashboard</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="events.html" class="nav-link">
+              <span class="nav-icon">🚀</span>
+              <span>Public Events</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="../backend/test-db.php" class="nav-link" target="_blank">
+              <span class="nav-icon">⚡</span>
+              <span>Database Status</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-summary">
+          <div class="avatar" style="background: #ef4444; color: #fff;">A</div>
+          <div class="user-details">
+            <div class="user-name" id="adminSidebarName">Administrator</div>
+            <div class="user-subtext">admin@charusat.edu.in</div>
+          </div>
+        </div>
+        <div style="margin-top: 0.75rem;">
+          <a href="../backend/auth/logout.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Sign Out</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="portal-main">
+      <header class="portal-topbar" role="banner">
+        <div class="topbar-left">
+          <button type="button" class="btn-icon mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+          <div class="topbar-context-badge">
+            <span class="admin-badge">Admin Control Center</span>
+            <span class="text-xs text-muted" style="margin-left: 0.5rem;">Practical 14 RBAC & Audit Trail</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <a href="admin-students.html" class="btn btn-secondary btn-sm">+ Add Student</a>
+          <a href="admin-events.html" class="btn btn-primary btn-sm">+ Add Event</a>
+        </div>
+      </header>
+
+      <main class="portal-content" id="mainContent">
+        <!-- Page Header -->
+        <div class="dash-page-header">
+          <div>
+            <h1 class="dash-greeting-title" id="adminGreeting">Department Administration Console</h1>
+            <div class="dash-meta-row">
+              <span>CHARUSAT • DEPSTAR Information Technology</span>
+              <span class="dash-meta-divider">•</span>
+              <span class="dash-context-pill">Semester 3 (Odd Term 2026–27)</span>
+              <span class="dash-meta-divider">•</span>
+              <span class="text-xs text-muted" id="serverTimeBadge">Live MySQL Sync</span>
+            </div>
+          </div>
+          <div class="dash-quick-links">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="loadDashboardData()">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="dash-metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Total Enrolled Students</span>
+              <span class="metric-badge">P11 CRUD</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-value" id="kpiStudents">—</span>
+            </div>
+            <div class="metric-subtext" id="kpiBatchDist">Loading batches...</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">User Accounts</span>
+              <span class="metric-badge">P9 Auth</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-value" id="kpiUsers">—</span>
+            </div>
+            <div class="metric-subtext">Students & Administrators</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Campus Events</span>
+              <span class="metric-badge">P12 Uploads</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-value" id="kpiEvents">—</span>
+            </div>
+            <div class="metric-subtext" id="kpiOpenEvents">All active registrations</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Total Registrations</span>
+              <span class="metric-badge">Relational JOIN</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-value" id="kpiRegistrations">—</span>
+            </div>
+            <div class="metric-subtext">Across all technical events</div>
+          </div>
+        </div>
+
+        <!-- Two Column Layout: Recent Registrations & Live Audit Trail -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+          
+          <!-- Recent Registrations Card -->
+          <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">Recent Event Registrations</h3>
+                <p class="text-xs text-muted">Latest student enrollments across workshops and hackathons</p>
+              </div>
+              <a href="admin-events.html" class="btn btn-ghost btn-sm">Manage Events →</a>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-medium); text-align: left; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
+                    <th style="padding: 0.5rem;">Student</th>
+                    <th style="padding: 0.5rem;">Event</th>
+                    <th style="padding: 0.5rem;">Status</th>
+                    <th style="padding: 0.5rem;">Time</th>
+                  </tr>
+                </thead>
+                <tbody id="recentRegsTableBody">
+                  <tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">Loading registrations...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Live Audit Log Feed (Practical 14 Requirement) -->
+          <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">Security & Audit Log Trail</h3>
+                <p class="text-xs text-muted">Real-time log of administrative logins, registrations & CRUD actions</p>
+              </div>
+              <span class="badge badge-accent">Live Stream</span>
+            </div>
+
+            <div style="overflow-y: auto; max-height: 380px;">
+              <div id="auditLogStream" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">Loading audit logs...</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script>
+    async function loadDashboardData() {
+      try {
+        const res = await fetch('../backend/api/dashboard.php');
+        if (res.status === 401 || res.status === 403) {
+          window.location.href = 'login.html?error=admin_required';
+          return;
+        }
+        const json = await res.json();
+        if (!json.success) {
+          console.error('Failed to load metrics:', json.message);
+          return;
+        }
+
+        // Populate KPIs
+        document.getElementById('kpiStudents').innerText = json.metrics.total_students;
+        document.getElementById('kpiUsers').innerText = json.metrics.total_users;
+        document.getElementById('kpiEvents').innerText = json.metrics.total_events;
+        document.getElementById('kpiRegistrations').innerText = json.metrics.total_registrations;
+        document.getElementById('navStudentCount').innerText = json.metrics.total_students;
+        document.getElementById('navEventCount').innerText = json.metrics.total_events;
+
+        // Batch Distribution
+        const batches = json.batch_distribution.map(b => `${b.batch}: ${b.count}`).join(' • ');
+        document.getElementById('kpiBatchDist').innerText = batches || 'No batches enrolled';
+
+        document.getElementById('kpiOpenEvents').innerText = `${json.metrics.open_events} Open for Registration`;
+        document.getElementById('serverTimeBadge').innerText = `Synced at ${json.server_time}`;
+
+        // Populate Recent Registrations Table
+        const regBody = document.getElementById('recentRegsTableBody');
+        if (json.recent_registrations && json.recent_registrations.length > 0) {
+          regBody.innerHTML = json.recent_registrations.map(r => `
+            <tr style="border-bottom: 1px solid var(--border-subtle); font-size: 0.85rem;">
+              <td style="padding: 0.65rem 0.5rem;">
+                <strong>${escapeHtml(r.student_name)}</strong><br>
+                <span class="text-xs text-muted">${escapeHtml(r.roll_no)} (${escapeHtml(r.batch)})</span>
+              </td>
+              <td style="padding: 0.65rem 0.5rem;">
+                ${escapeHtml(r.event_title)}<br>
+                <span class="badge badge-accent text-xs">${escapeHtml(r.event_category)}</span>
+              </td>
+              <td style="padding: 0.65rem 0.5rem;">
+                <span class="badge badge-success text-xs">${escapeHtml(r.status)}</span>
+              </td>
+              <td style="padding: 0.65rem 0.5rem;" class="text-xs text-muted">
+                ${new Date(r.registered_at).toLocaleDateString()}
+              </td>
+            </tr>
+          `).join('');
+        } else {
+          regBody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem; color: var(--text-muted);">No recent registrations found.</td></tr>';
+        }
+
+        // Populate Audit Log Stream
+        const auditStream = document.getElementById('auditLogStream');
+        if (json.audit_logs && json.audit_logs.length > 0) {
+          auditStream.innerHTML = json.audit_logs.map(log => `
+            <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.85rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                <span class="audit-action-tag">${escapeHtml(log.action)}</span>
+                <span class="text-xs text-muted">${new Date(log.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} • IP: ${escapeHtml(log.ip_address || '127.0.0.1')}</span>
+              </div>
+              <div style="color: var(--text-primary); font-size: 0.825rem;">${escapeHtml(log.details)}</div>
+              <div class="text-xs text-muted" style="margin-top: 0.2rem;">By: ${escapeHtml(log.email || 'System')} (${escapeHtml(log.role || 'daemon')})</div>
+            </div>
+          `).join('');
+        } else {
+          auditStream.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No audit events recorded yet.</div>';
+        }
+
+      } catch (err) {
+        console.error('Error loading admin dashboard:', err);
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDashboardData();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA — Connected Academic Student Portal for CHARUSAT / DEPSTAR B.Tech Information Technology. Access your timetable, courses, events, notices, and resources in one clean interface.">
+  <title>SYNORA — Your Student Life, Connected | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="public-navbar" role="banner">
+    <a href="index.html" class="brand-logo" aria-label="Synora Home">
+      <div class="brand-icon">S</div>
+      <span>SYNORA</span>
+      <span class="brand-badge">DEPSTAR</span>
+    </a>
+
+    <nav class="public-nav-links" aria-label="Main Navigation">
+      <a href="index.html" class="public-nav-link active">Home</a>
+      <a href="pages/about.html" class="public-nav-link">About</a>
+      <a href="pages/courses.html" class="public-nav-link">Courses</a>
+      <a href="pages/schedule.html" class="public-nav-link">Timetable</a>
+      <a href="pages/events.html" class="public-nav-link">Events</a>
+      <a href="pages/notices.html" class="public-nav-link">Notices</a>
+      <a href="pages/faq.html" class="public-nav-link">FAQ</a>
+      <a href="pages/contact.html" class="public-nav-link">Contact</a>
+      <div class="public-nav-cta">
+        <a href="pages/dashboard.html" class="btn btn-primary btn-sm">Student Portal →</a>
+      </div>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">
+        ☀️
+      </button>
+      <a href="pages/login.html" class="btn btn-secondary btn-sm" style="margin-left: 0.5rem;">Sign In</a>
+      <a href="pages/register.html" class="btn btn-primary btn-sm">Register</a>
+      <button type="button" class="btn-icon mobile-menu-btn public-nav-toggle" aria-label="Open mobile menu" style="display: none; margin-left: 0.5rem;">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main id="mainContent">
+    <!-- Hero -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <span>CHARUSAT · DEPSTAR Department of Information Technology</span>
+        </div>
+        <h1 class="hero-title">
+          Academic Student Portal <br>
+          <span class="gradient-text">B.Tech IT — Semester 3</span>
+        </h1>
+        <p class="hero-desc">
+          Your classes, subjects and campus updates in one place. Real-time timetable, attendance monitoring, and department updates for Academic Year 2026–27.
+        </p>
+        <div class="hero-actions">
+          <a href="pages/dashboard.html" class="btn btn-primary btn-lg">Student Dashboard →</a>
+          <a href="pages/schedule.html" class="btn btn-secondary btn-lg">Official Timetable</a>
+          <a href="pages/courses.html" class="btn btn-ghost btn-lg">Enrolled Courses</a>
+        </div>
+
+        <div class="hero-stats-strip">
+          <div class="hero-stat-item">
+            <div class="hero-stat-val">6</div>
+            <div class="hero-stat-lbl">Core Subjects</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-val">100%</div>
+            <div class="hero-stat-lbl">Digital Timetable</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-val">16+</div>
+            <div class="hero-stat-lbl">Active Events</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-val">3rd Sem</div>
+            <div class="hero-stat-lbl">Odd Term 2026–27</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="badge badge-accent" style="margin-bottom: 0.5rem;">Core Modules</span>
+          <h2>Everything You Need in One Unified Portal</h2>
+          <p>Built with accessible HTML5, responsive CSS Grid layouts, and dynamic Fetch API integration.</p>
+        </div>
+
+        <div class="grid grid-4">
+          <article class="card card-hover feature-card">
+            <div>
+              <div class="feature-icon-box">📅</div>
+              <h3>Official Timetable</h3>
+              <p>Direct digital representation of CHARUSAT DEPSTAR B.Tech IT 3rd semester schedule with live class detection and batch filtering.</p>
+            </div>
+            <div class="card-footer" style="padding: 0; margin-top: 1.5rem; border: none;">
+              <a href="pages/schedule.html" class="btn btn-sm btn-ghost" style="padding-left: 0;">Open Timetable →</a>
+            </div>
+          </article>
+
+          <article class="card card-hover feature-card">
+            <div>
+              <div class="feature-icon-box">📚</div>
+              <h3>Courses & Progress</h3>
+              <p>Track syllabus, faculty coordinators, credits, and attendance across FCN, FDSA, WDF, OOP, DM, and CPI.</p>
+            </div>
+            <div class="card-footer" style="padding: 0; margin-top: 1.5rem; border: none;">
+              <a href="pages/courses.html" class="btn btn-sm btn-ghost" style="padding-left: 0;">View Courses →</a>
+            </div>
+          </article>
+
+          <article class="card card-hover feature-card">
+            <div>
+              <div class="feature-icon-box">⚡</div>
+              <h3>Campus Events</h3>
+              <p>Search, filter by category, sort, and paginate campus hackathons and workshops dynamically using the Fetch API.</p>
+            </div>
+            <div class="card-footer" style="padding: 0; margin-top: 1.5rem; border: none;">
+              <a href="pages/events.html" class="btn btn-sm btn-ghost" style="padding-left: 0;">Discover Events →</a>
+            </div>
+          </article>
+
+          <article class="card card-hover feature-card">
+            <div>
+              <div class="feature-icon-box">📢</div>
+              <h3>Department Notices</h3>
+              <p>Real-time academic alerts, room changes, and evaluation announcements highlighted with urgent priority badges.</p>
+            </div>
+            <div class="card-footer" style="padding: 0; margin-top: 1.5rem; border: none;">
+              <a href="pages/notices.html" class="btn btn-sm btn-ghost" style="padding-left: 0;">Read Notices →</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="academic-callout">
+          <div class="callout-text">
+            <h3>Faculty of Technology & Engineering — DEPSTAR</h3>
+            <p>Department of Information Technology • Academic Session 2026–27 • Designed for Web Development Frameworks (ITUE203)</p>
+          </div>
+          <div class="flex gap-1">
+            <a href="pages/register.html" class="btn btn-primary">Student Registration</a>
+            <a href="pages/about.html" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="public-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon">S</div>
+            <span>SYNORA</span>
+          </div>
+          <p>
+            Connecting campus academics, digital timetables, and student events. Built strictly with frontend standards for ITUE203 practical demonstration.
+          </p>
+          <div class="text-xs text-muted font-mono" style="margin-top: 0.75rem;">
+            Student: Tanis Bedia (25DIT006) • B.Tech IT 3rd Sem
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Portal Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="pages/dashboard.html">Dashboard</a>
+            <a href="pages/courses.html">Courses</a>
+            <a href="pages/schedule.html">Timetable</a>
+            <a href="pages/events.html">Campus Events</a>
+            <a href="pages/notices.html">Notices</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Student Services</h4>
+          <div class="footer-links">
+            <a href="pages/profile.html">Student Profile</a>
+            <a href="pages/resources.html">Academic Resources</a>
+            <a href="pages/register.html">Registration Form</a>
+            <a href="pages/login.html">Login Portal</a>
+            <a href="pages/feedback.html">Feedback</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Administration & Practicals</h4>
+          <div class="footer-links">
+            <a href="pages/admin-dashboard.html" style="color: #ef4444; font-weight: 600;">🛡️ Admin Dashboard</a>
+            <a href="pages/admin-students.html">Manage Students (P11)</a>
+            <a href="pages/admin-events.html">Manage Events (P12)</a>
+            <a href="backend/test-db.php" target="_blank">Database Test (P8)</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Help & Campus</h4>
+          <div class="footer-links">
+            <a href="pages/about.html">About Synora</a>
+            <a href="pages/faq.html">FAQ Accordion</a>
+            <a href="pages/contact.html">Contact Desk</a>
+            <a href="assets/images/timetable_source.png" target="_blank">Official Timetable Image</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 SYNORA Academic Portal — CHARUSAT / DEPSTAR Information Technology Department.
+        </div>
+        <div class="flex gap-2">
+          <span>Web Development Frameworks (ITUE203)</span>
+          <span>•</span>
+          <span>Practicals 1–15 Full-Stack Implementation</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -99,4 +99,97 @@
       }
     });
   }
+
+  // Session & Authentication state synchronizer (Practicals 10 & 14)
+  async function syncAuthSession() {
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const sessionUrl = isPagesDir ? '../backend/auth/session.php' : 'backend/auth/session.php';
+    const logoutUrl  = isPagesDir ? '../backend/auth/logout.php' : 'backend/auth/logout.php';
+    const loginUrl   = isPagesDir ? 'login.html' : 'pages/login.html';
+    const adminDashUrl = isPagesDir ? 'admin-dashboard.html' : 'pages/admin-dashboard.html';
+
+    try {
+      const res = await fetch(sessionUrl);
+      if (!res.ok) return;
+      const data = await res.json();
+
+      if (data && data.logged_in && data.user) {
+        const user = data.user;
+
+        // Update name and initials in UI
+        const nameEls = document.querySelectorAll('.student-name, #userDisplayName');
+        nameEls.forEach(el => { el.textContent = user.full_name || user.name || user.email; });
+
+        const metaEls = document.querySelectorAll('.student-meta, #userDisplayMeta');
+        metaEls.forEach(el => {
+          if (user.role === 'admin') {
+            el.textContent = 'Administrator • IT Dept';
+          } else {
+            el.textContent = `${user.roll_no || 'Student'} · ${user.division || '3IT-A'}`;
+          }
+        });
+
+        // Greeting update
+        const greeting = document.getElementById('dashGreeting');
+        if (greeting && user.full_name) {
+          const firstName = user.full_name.split(' ')[0];
+          greeting.textContent = `Good day, ${firstName}.`;
+        }
+
+        // Avatar initials
+        const avatarEls = document.querySelectorAll('.student-avatar');
+        avatarEls.forEach(av => {
+          if (user.role === 'admin') {
+            av.textContent = 'AD';
+          } else if (user.full_name) {
+            const parts = user.full_name.trim().split(' ');
+            const initials = parts.length > 1 ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() : parts[0].substring(0, 2).toUpperCase();
+            av.textContent = initials;
+          }
+        });
+
+        // If admin, add Admin Console shortcut in sidebar if not present
+        if (user.role === 'admin') {
+          const navGroups = document.querySelectorAll('.nav-group');
+          if (navGroups.length > 0 && !document.getElementById('navAdminLink')) {
+            const adminItem = document.createElement('div');
+            adminItem.className = 'nav-item';
+            adminItem.id = 'navAdminLink';
+            adminItem.innerHTML = `
+              <a href="${adminDashUrl}" class="nav-link" style="color: #ef4444; font-weight: 600;">
+                <span class="nav-icon">🛡️</span>
+                <span>Admin Console</span>
+              </a>
+            `;
+            navGroups[0].appendChild(adminItem);
+          }
+        }
+
+        // Add Sign Out link in sidebar footer if not already present
+        const sidebarFooters = document.querySelectorAll('.sidebar-footer');
+        sidebarFooters.forEach(sf => {
+          if (!sf.querySelector('.logout-btn-link')) {
+            const logoutDiv = document.createElement('div');
+            logoutDiv.className = 'logout-btn-link';
+            logoutDiv.style.marginTop = '0.75rem';
+            logoutDiv.style.paddingTop = '0.5rem';
+            logoutDiv.style.borderTop = '1px solid var(--border-subtle)';
+            logoutDiv.innerHTML = `
+              <a href="${logoutUrl}" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center; font-size: 0.8rem;">
+                Sign Out
+              </a>
+            `;
+            sf.appendChild(logoutDiv);
+          }
+        });
+      }
+    } catch (e) {
+      // Quiet fail if offline or not on PHP server
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    syncAuthSession();
+  });
 })();
+

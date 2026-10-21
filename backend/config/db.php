@@ -1,9 +1,9 @@
 <?php
-// Database configuration and PDO connection layer (Practical 8)
+// Database configuration and connectivity layer supporting both PDO and MySQLi (Practical 8)
 
-// Load connection settings from environment variables or fall back to local defaults
+// Load connection settings from environment variables or fall back to local XAMPP/MySQL defaults
 $dbHost = getenv('DB_HOST') ?: '127.0.0.1';
-$dbPort = getenv('DB_PORT') ?: '3306';
+$dbPort = (int)(getenv('DB_PORT') ?: 3306);
 $dbName = getenv('DB_NAME') ?: 'synora';
 $dbUser = getenv('DB_USER') ?: 'root';
 $dbPass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : '';
@@ -35,10 +35,33 @@ function getDbConnection() {
         $pdoInstance = new PDO($dsn, $dbUser, $dbPass, $options);
         return $pdoInstance;
     } catch (PDOException $e) {
-        // Log technical details safely to server error log without leaking to client
-        error_log('Database Connection Error: ' . $e->getMessage());
-
-        // Throw safe user-facing exception without database credentials
+        error_log('PDO Database Connection Error: ' . $e->getMessage());
         throw new RuntimeException('Database connection failed. Please ensure the local MySQL service is active and the synora database is initialized.');
+    }
+}
+
+/**
+ * Returns a configured MySQLi database connection instance.
+ * @return mysqli
+ * @throws RuntimeException If database connection fails
+ */
+function getMysqliConnection() {
+    global $dbHost, $dbPort, $dbName, $dbUser, $dbPass;
+
+    static $mysqliInstance = null;
+
+    if ($mysqliInstance !== null) {
+        return $mysqliInstance;
+    }
+
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+    try {
+        $mysqliInstance = new mysqli($dbHost, $dbUser, $dbPass, $dbName, $dbPort);
+        $mysqliInstance->set_charset('utf8mb4');
+        return $mysqliInstance;
+    } catch (mysqli_sql_exception $e) {
+        error_log('MySQLi Database Connection Error: ' . $e->getMessage());
+        throw new RuntimeException('MySQLi database connection failed. Please ensure local MySQL service is active.');
     }
 }

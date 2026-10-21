@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 04: JavaScript DOM Manipulation & UI Interactivity</title>
+  <link rel="stylesheet" href="css/interactivity.css">
+</head>
+<body>
+
+  <div class="container">
+    <header class="header-bar">
+      <div>
+        <h1 style="font-size: 1.6rem; font-weight: 700;">Practical 04: UI Interactivity Showcase</h1>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">DOM Manipulation, Event Listeners, and LocalStorage State</p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" id="themeToggleBtn">
+          <span id="themeIcon">🌙 Dark Mode</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Widget 1: Collapsible FAQ Accordion -->
+    <section class="widget-card">
+      <h2 class="widget-title"><span>📂</span> 1. Collapsible FAQ Accordion</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.85rem;">Clicking headers triggers event listeners to expand/collapse panels using dynamic class toggling.</p>
+      
+      <div class="accordion-item active">
+        <button type="button" class="accordion-header">
+          <span>What is the gross lecture attendance requirement at CHARUSAT?</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <p>According to DEPSTAR academic regulations, students must maintain a minimum of 80% gross lecture attendance. In Synora, the current semester gross lecture attendance is tracked live at 63%.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button type="button" class="accordion-header">
+          <span>How does localStorage persist the theme across page refreshes?</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <p>The theme switcher writes the active theme key (<code>synora_theme</code>) to browser <code>localStorage</code>. On subsequent DOM load events, JavaScript reads the stored key before rendering content.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button type="button" class="accordion-header">
+          <span>Which subjects are enrolled in Semester 3 B.Tech IT?</span>
+          <span class="accordion-icon">▼</span>
+        </button>
+        <div class="accordion-content">
+          <p>Core subjects include CEUE203 (OOP Java), CSUC201 (Data Structures), ITUE203 (Web Development Frameworks), CEUE202 (Digital Logic), and MAUE201 (Discrete Mathematics).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Widget 2: Content Carousel Slider -->
+    <section class="widget-card">
+      <h2 class="widget-title"><span>🔄</span> 2. Content Carousel Slider</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.85rem;">Slides adapt using CSS transforms driven by DOM click event handlers.</p>
+
+      <div class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide-item">
+            <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Web Development Frameworks (ITUE203)</h3>
+            <p>Hands-on implementation of responsive frontend design, client-side validation, PHP server-side form handling, and relational MySQL database connectivity.</p>
+          </div>
+          <div class="slide-item">
+            <h3 style="color: var(--success); margin-bottom: 0.5rem;">Object Oriented Programming (CEUE203)</h3>
+            <p>Mastering core Java concepts: inheritance, polymorphism, abstract classes, multi-threading, and robust exception handling frameworks.</p>
+          </div>
+          <div class="slide-item">
+            <h3 style="color: #F59E0B; margin-bottom: 0.5rem;">Fundamentals of Data Structures & Algorithms (CSUC201)</h3>
+            <p>Practical exploration of linear and non-linear data structures: dynamic arrays, linked lists, stacks, queues, binary trees, and graph traversal algorithms.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button type="button" class="btn btn-secondary" id="prevSlideBtn">← Previous Slide</button>
+        <span id="slideIndicator" style="font-weight: 600; font-size: 0.85rem; align-self: center;">Slide 1 of 3</span>
+        <button type="button" class="btn btn-secondary" id="nextSlideBtn">Next Slide →</button>
+      </div>
+    </section>
+
+    <!-- Widget 3: Modal Dialog & Toast Notifications -->
+    <section class="widget-card">
+      <h2 class="widget-title"><span>💬</span> 3. Modal Dialog & Toast Notification Dispatcher</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.85rem;">Demonstrates keyboard trapping, overlay backdrop click handling, and dynamic toast DOM injection.</p>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary" id="openModalBtn">Open Interactive Modal</button>
+        <button type="button" class="btn btn-secondary" id="triggerToastBtn">Dispatch Toast Notification</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Modal Element -->
+  <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 0.5rem;">SYNORA Student Modal</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem;">
+        This modal is bound to click events, outside-backdrop dismissal, and the keyboard <kbd>Esc</kbd> key.
+      </p>
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+        <button type="button" class="btn btn-secondary" id="closeModalBtn">Close Dialog</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/interactivity.js"></script>
+</body>
+</html>

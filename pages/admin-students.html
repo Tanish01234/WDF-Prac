@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SYNORA Student Management — Practical 11 & 13 MySQLi Prepared CRUD with AJAX Search & Filter.">
+  <title>Manage Students — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="../js/theme.js"></script>
+  <style>
+    .admin-badge {
+      background: rgba(220, 38, 38, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .data-table th, .data-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+    .data-table th {
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .data-table tr:hover td {
+      background: var(--bg-elevated);
+    }
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 580px;
+      padding: 2rem;
+      box-shadow: var(--shadow-xl);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Admin Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
+          <span>SYNORA <span style="font-size: 0.7rem; color: #ef4444; font-weight: 700;">ADMIN</span></span>
+        </a>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Administration</div>
+          <div class="nav-item">
+            <a href="admin-dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Overview</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-students.html" class="nav-link active">
+              <span class="nav-icon">👥</span>
+              <span>Manage Students</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="admin-events.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Manage Events</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Portal Views</div>
+          <div class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">🎓</span>
+              <span>Student Dashboard</span>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="../backend/test-db.php" class="nav-link" target="_blank">
+              <span class="nav-icon">⚡</span>
+              <span>Database Status</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="../backend/auth/logout.php" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">Sign Out</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="portal-main">
+      <header class="portal-topbar" role="banner">
+        <div class="topbar-left">
+          <button type="button" class="btn-icon mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+          <div class="topbar-context-badge">
+            <span class="admin-badge">Admin Control Center</span>
+            <span class="text-xs text-muted" style="margin-left: 0.5rem;">Practicals 11 & 13 — MySQLi Prepared CRUD</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openAddStudentModal()">+ Add New Student</button>
+        </div>
+      </header>
+
+      <main class="portal-content" id="mainContent">
+        <!-- Page Header -->
+        <div class="dash-page-header">
+          <div>
+            <h1 class="dash-greeting-title">Student Directory Management</h1>
+            <p class="text-sm text-muted">
+              Live CRUD operations using MySQLi prepared statements and Fetch API (no full page reload).
+            </p>
+          </div>
+          <div class="dash-quick-links">
+            <span class="badge badge-accent" id="studentTotalBadge">Loading...</span>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="card" style="padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div style="flex: 1; min-width: 260px;">
+              <input type="text" id="studentSearchInput" class="form-input" placeholder="🔍 Search by name, roll no (e.g. 25DIT006), or email..." oninput="handleSearch()">
+            </div>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <select id="batchFilterSelect" class="form-select" onchange="loadStudents(1)">
+                <option value="all">All Batches</option>
+                <option value="Batch A">Batch A (DIT 001–020)</option>
+                <option value="Batch B">Batch B (DIT 021–040)</option>
+                <option value="Batch C">Batch C (DIT 041–060)</option>
+              </select>
+              <select id="courseFilterSelect" class="form-select" onchange="loadStudents(1)">
+                <option value="all">All Programs</option>
+                <option value="B.Tech IT" selected>B.Tech IT</option>
+                <option value="B.Tech CSE">B.Tech CSE</option>
+                <option value="B.Tech CE">B.Tech CE</option>
+              </select>
+              <button type="button" class="btn btn-secondary" onclick="loadStudents(1)">Filter</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Students Table -->
+        <div class="card" style="background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); overflow: hidden;">
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Email & Mobile</th>
+                  <th>Batch / Div</th>
+                  <th>Program</th>
+                  <th>Sem</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentsTableBody">
+                <tr><td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">Loading student records from MySQL...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Bar -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: var(--bg-elevated); border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 1rem;">
+            <div class="text-xs text-muted" id="paginationInfo">Showing 0 of 0 students</div>
+            <div style="display: flex; gap: 0.5rem;" id="paginationButtons">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add / Edit Student Modal -->
+  <div class="modal-backdrop" id="studentModal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 id="modalTitle" style="font-size: 1.25rem;">Add New Student</h3>
+        <button type="button" class="btn-icon" onclick="closeStudentModal()">✕</button>
+      </div>
+
+      <div class="alert alert-danger" id="modalAlert" style="display: none; margin-bottom: 1rem;"></div>
+
+      <form id="studentForm" onsubmit="saveStudent(event)">
+        <input type="hidden" id="studentId" value="">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="studRoll">Roll Number <span class="required">*</span></label>
+            <input type="text" id="studRoll" class="form-input" placeholder="e.g. 25DIT055" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="studName">Full Name <span class="required">*</span></label>
+            <input type="text" id="studName" class="form-input" placeholder="e.g. Priyansh Shah" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="studEmail">University Email <span class="required">*</span></label>
+            <input type="email" id="studEmail" class="form-input" placeholder="student@charusat.edu.in" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="studMobile">Mobile Number <span class="required">*</span></label>
+            <input type="tel" id="studMobile" class="form-input" placeholder="9876543210" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="studBatch">Lab Batch <span class="required">*</span></label>
+            <select id="studBatch" class="form-select" required>
+              <option value="Batch A">Batch A (DIT 001–020)</option>
+              <option value="Batch B">Batch B (DIT 021–040)</option>
+              <option value="Batch C">Batch C (DIT 041–060)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="studDiv">Class Division <span class="required">*</span></label>
+            <input type="text" id="studDiv" class="form-input" value="3IT-A" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="studCourse">Program <span class="required">*</span></label>
+            <select id="studCourse" class="form-select" required>
+              <option value="B.Tech IT">B.Tech IT</option>
+              <option value="B.Tech CSE">B.Tech CSE</option>
+              <option value="B.Tech CE">B.Tech CE</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="studGender">Gender <span class="required">*</span></label>
+            <select id="studGender" class="form-select" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeStudentModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveStudentBtn">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script>
+    let currentPage = 1;
+    let searchTimeout = null;
+
+    async function loadStudents(page = 1) {
+      currentPage = page;
+      const search = document.getElementById('studentSearchInput').value.trim();
+      const batch = document.getElementById('batchFilterSelect').value;
+      const course = document.getElementById('courseFilterSelect').value;
+
+      const url = new URL('../backend/api/students.php', window.location.href);
+      url.searchParams.set('page', page);
+      url.searchParams.set('limit', 10);
+      if (search) url.searchParams.set('search', search);
+      if (batch !== 'all') url.searchParams.set('batch', batch);
+      if (course !== 'all') url.searchParams.set('course', course);
+
+      try {
+        const res = await fetch(url);
+        if (res.status === 401 || res.status === 403) {
+          window.location.href = 'login.html?error=admin_required';
+          return;
+        }
+        const json = await res.json();
+        if (!json.success) {
+          console.error('Students API error:', json.message);
+          return;
+        }
+
+        renderTable(json.data);
+        renderPagination(json.pagination);
+        document.getElementById('studentTotalBadge').innerText = `${json.pagination.total} Students`;
+
+      } catch (err) {
+        console.error('Fetch error:', err);
+      }
+    }
+
+    function renderTable(students) {
+      const tbody = document.getElementById('studentsTableBody');
+      if (!students || students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">No student records matched your query.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = students.map(s => `
+        <tr>
+          <td><strong class="font-mono text-xs" style="color: var(--accent-primary);">${escapeHtml(s.roll_no)}</strong></td>
+          <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td>
+            <div style="font-size: 0.8rem;">${escapeHtml(s.email)}</div>
+            <div class="text-xs text-muted">${escapeHtml(s.mobile)}</div>
+          </td>
+          <td>
+            <span class="badge badge-accent text-xs">${escapeHtml(s.batch)}</span>
+            <span class="text-xs text-muted">${escapeHtml(s.division)}</span>
+          </td>
+          <td>${escapeHtml(s.course)}</td>
+          <td>Sem ${escapeHtml(s.semester)}</td>
+          <td style="text-align: right; white-space: nowrap;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openEditModal(${s.id})">Edit</button>
+            <button type="button" class="btn btn-ghost btn-sm" style="color: #ef4444;" onclick="deleteStudent(${s.id}, '${escapeHtml(s.roll_no)}')">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderPagination(p) {
+      document.getElementById('paginationInfo').innerText = `Showing page ${p.page} of ${p.total_pages || 1} (${p.total} total records)`;
+      const container = document.getElementById('paginationButtons');
+
+      let html = '';
+      if (p.page > 1) {
+        html += `<button type="button" class="btn btn-secondary btn-sm" onclick="loadStudents(${p.page - 1})">← Prev</button>`;
+      }
+      for (let i = 1; i <= (p.total_pages || 1); i++) {
+        if (i === p.page) {
+          html += `<button type="button" class="btn btn-primary btn-sm">${i}</button>`;
+        } else if (i <= 3 || i === p.total_pages || Math.abs(i - p.page) <= 1) {
+          html += `<button type="button" class="btn btn-secondary btn-sm" onclick="loadStudents(${i})">${i}</button>`;
+        }
+      }
+      if (p.page < p.total_pages) {
+        html += `<button type="button" class="btn btn-secondary btn-sm" onclick="loadStudents(${p.page + 1})">Next →</button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function handleSearch() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        loadStudents(1);
+      }, 300);
+    }
+
+    function openAddStudentModal() {
+      document.getElementById('modalTitle').innerText = 'Add New Student';
+      document.getElementById('studentId').value = '';
+      document.getElementById('studentForm').reset();
+      document.getElementById('modalAlert').style.display = 'none';
+      document.getElementById('studentModal').classList.add('active');
+    }
+
+    async function openEditModal(id) {
+      try {
+        const res = await fetch(`../backend/api/students.php?id=${id}`);
+        const json = await res.json();
+        if (!json.success || !json.data) {
+          alert('Could not fetch student record.');
+          return;
+        }
+        const s = json.data;
+        document.getElementById('modalTitle').innerText = `Edit Student — ${s.roll_no}`;
+        document.getElementById('studentId').value = s.id;
+        document.getElementById('studRoll').value = s.roll_no;
+        document.getElementById('studName').value = s.name;
+        document.getElementById('studEmail').value = s.email;
+        document.getElementById('studMobile').value = s.mobile;
+        document.getElementById('studBatch').value = s.batch;
+        document.getElementById('studDiv').value = s.division;
+        document.getElementById('studCourse').value = s.course;
+        document.getElementById('studGender').value = s.gender;
+        document.getElementById('modalAlert').style.display = 'none';
+        document.getElementById('studentModal').classList.add('active');
+      } catch (e) {
+        alert('Error loading student.');
+      }
+    }
+
+    function closeStudentModal() {
+      document.getElementById('studentModal').classList.remove('active');
+    }
+
+    async function saveStudent(e) {
+      e.preventDefault();
+      const id = document.getElementById('studentId').value;
+      const isEdit = Boolean(id);
+
+      const payload = {
+        id: id ? parseInt(id, 10) : undefined,
+        roll_no: document.getElementById('studRoll').value.trim(),
+        name: document.getElementById('studName').value.trim(),
+        email: document.getElementById('studEmail').value.trim(),
+        mobile: document.getElementById('studMobile').value.trim(),
+        batch: document.getElementById('studBatch').value,
+        division: document.getElementById('studDiv').value.trim(),
+        course: document.getElementById('studCourse').value,
+        gender: document.getElementById('studGender').value
+      };
+
+      const btn = document.getElementById('saveStudentBtn');
+      btn.disabled = true;
+      btn.innerText = 'Saving...';
+
+      try {
+        const res = await fetch('../backend/api/students.php', {
+          method: isEdit ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+
+        btn.disabled = false;
+        btn.innerText = 'Save Record';
+
+        if (json.success) {
+          closeStudentModal();
+          loadStudents(currentPage);
+        } else {
+          const alertBox = document.getElementById('modalAlert');
+          alertBox.innerText = json.message || 'Operation failed.';
+          alertBox.style.display = 'block';
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = 'Save Record';
+        alert('Communication error with students API.');
+      }
+    }
+
+    async function deleteStudent(id, rollNo) {
+      if (!confirm(`Are you sure you want to delete student ${rollNo}? This will also remove any event registrations.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch('../backend/api/students.php', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        const json = await res.json();
+        if (json.success) {
+          loadStudents(currentPage);
+        } else {
+          alert(json.message || 'Failed to delete student.');
+        }
+      } catch (e) {
+        alert('Failed to connect to server.');
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudents(1);
+    });
+  </script>
+</body>
+</html>

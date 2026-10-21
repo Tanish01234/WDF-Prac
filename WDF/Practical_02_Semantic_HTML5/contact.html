@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact SYNORA — IT Department office hours, campus help desk, and student inquiry portal at CHARUSAT DEPSTAR.">
+  <title>Contact Department Desk — SYNORA | CHARUSAT DEPSTAR</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/contact.css">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+
+  <div class="portal-layout">
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Portal Navigation">
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand-logo">
+          <div class="brand-icon">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon sidebar-close-btn" aria-label="Close sidebar" style="display: none;">✕</button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-group">
+          <div class="nav-group-title">Main Menu</div>
+          <div class="nav-item"><a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span><span>Overview</span></a></div>
+          <div class="nav-item"><a href="courses.html" class="nav-link"><span class="nav-icon">📚</span><span>Courses</span></a></div>
+          <div class="nav-item"><a href="schedule.html" class="nav-link"><span class="nav-icon">📅</span><span>Timetable</span><span class="nav-badge-count">Live</span></a></div>
+          <div class="nav-item"><a href="events.html" class="nav-link"><span class="nav-icon">⚡</span><span>Events</span></a></div>
+          <div class="nav-item"><a href="notices.html" class="nav-link"><span class="nav-icon">📢</span><span>Notices</span></a></div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Academic & Resources</div>
+          <div class="nav-item"><a href="resources.html" class="nav-link"><span class="nav-icon">📂</span><span>Resources</span></a></div>
+          <div class="nav-item"><a href="about.html" class="nav-link"><span class="nav-icon">ℹ️</span><span>About Synora</span></a></div>
+          <div class="nav-item"><a href="faq.html" class="nav-link"><span class="nav-icon">❓</span><span>FAQ</span></a></div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Personal & Support</div>
+          <div class="nav-item"><a href="profile.html" class="nav-link"><span class="nav-icon">👤</span><span>Profile</span></a></div>
+          <div class="nav-item"><a href="register.html" class="nav-link"><span class="nav-icon">📝</span><span>Registration</span></a></div>
+          <div class="nav-item"><a href="contact.html" class="nav-link active"><span class="nav-icon">✉️</span><span>Contact</span></a></div>
+          <div class="nav-item"><a href="feedback.html" class="nav-link"><span class="nav-icon">💬</span><span>Feedback</span></a></div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="student-card-mini" style="text-decoration: none;">
+          <div class="student-avatar">TB</div>
+          <div class="student-info-mini">
+            <div class="student-name">Tanis Bedia</div>
+            <div class="student-meta">25DIT006 • 3IT-A</div>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="portal-main">
+      <div class="mobile-header">
+        <button type="button" class="mobile-menu-btn" aria-label="Open menu">☰</button>
+        <a href="../index.html" class="brand-logo" style="font-size: 1.15rem;">
+          <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">S</div>
+          <span>SYNORA</span>
+        </a>
+        <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <span class="topbar-search-icon">🔍</span>
+            <input type="text" class="topbar-search-input" placeholder="Search contact channels...">
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn-icon theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+          <a href="profile.html" class="student-avatar" style="width: 36px; height: 36px; text-decoration: none;">TB</a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1><span>✉️</span> IT Department Contact Desk</h1>
+            <p class="page-subtitle">Get in touch with department faculty, academic mentors, or technical coordinators</p>
+          </div>
+        </div>
+
+        <div class="contact-layout-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Send Academic Inquiry</h3>
+            </div>
+            <form id="contactForm" action="../backend/forms/contact.php" method="POST" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="contactName">Your Full Name <span class="required">*</span></label>
+                <input type="text" id="contactName" name="name" class="form-input" placeholder="e.g. Tanis Bedia" required>
+                <div class="form-feedback" id="contactNameFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">Student Email <span class="required">*</span></label>
+                <input type="email" id="contactEmail" name="email" class="form-input" placeholder="student@charusat.edu.in" required>
+                <div class="form-feedback" id="contactEmailFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactSubject">Inquiry Subject <span class="required">*</span></label>
+                <input type="text" id="contactSubject" name="subject" class="form-input" placeholder="e.g. Timetable query / Lab batch allocation" required>
+                <div class="form-feedback" id="contactSubjectFeedback"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">Message / Details <span class="required">*</span></label>
+                <textarea id="contactMessage" name="message" class="form-textarea" rows="4" placeholder="Explain your inquiry in detail..." required></textarea>
+                <div class="form-feedback" id="contactMessageFeedback"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                Submit Inquiry →
+              </button>
+            </form>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-channel">
+              <div class="contact-channel-icon">📍</div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem;">Campus Location</h4>
+                <p style="font-size: 0.875rem;">Department of Information Technology, 2nd Floor, DEPSTAR Building, CHARUSAT Campus, Changa, Gujarat — 388421.</p>
+              </div>
+            </div>
+
+            <div class="contact-channel">
+              <div class="contact-channel-icon">⏰</div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem;">Office Hours</h4>
+                <p style="font-size: 0.875rem;">Monday to Saturday: 09:00 AM – 04:30 PM (Lunch: 11:10 AM – 12:10 PM)</p>
+              </div>
+            </div>
+
+            <div class="contact-channel">
+              <div class="contact-channel-icon">📧</div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem;">Department Helpdesk</h4>
+                <p style="font-size: 0.875rem;">it.depstar@charusat.ac.in<br>mentor.it@charusat.edu.in</p>
+              </div>
+            </div>
+
+            <div class="contact-channel">
+              <div class="contact-channel-icon">📞</div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem;">Telephone Extension</h4>
+                <p style="font-size: 0.875rem;">+91 (02697) 265011 / Ext: 302</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/validation.js"></script>
+</body>
+</html>

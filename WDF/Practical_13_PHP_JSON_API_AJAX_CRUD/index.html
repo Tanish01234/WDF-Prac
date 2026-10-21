@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practical 13: PHP RESTful JSON API & AJAX CRUD</title>
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <style>
+    body { background: var(--bg-primary); color: var(--text-primary); padding: 2.5rem 1.5rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1.5rem; }
+    .inspector { background: #000; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem; font-family: monospace; font-size: 0.75rem; color: #10B981; max-height: 220px; overflow-y: auto; white-space: pre-wrap; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+    th { background: var(--bg-elevated); color: var(--text-secondary); text-transform: uppercase; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header style="margin-bottom: 2rem;">
+      <span class="badge badge-accent">Practical 13 Implementation</span>
+      <h1 style="font-size: 1.85rem; font-weight: 700; margin-top: 0.25rem;">RESTful PHP JSON API & Asynchronous Fetch CRUD</h1>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">
+        Pure JSON HTTP Responses (GET, POST, PUT, DELETE) • Real-Time Network Inspector • No Full Page Reload
+      </p>
+    </header>
+
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;">
+      
+      <!-- Left: Live Table & Add Form -->
+      <div>
+        <div class="card">
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+            <input type="text" id="apiSearchInput" class="form-input" style="flex: 1;" placeholder="🔍 Live search (GET ?search=)...">
+            <select id="apiBatchFilter" class="form-select" style="width: auto;">
+              <option value="all">All Batches</option>
+              <option value="Batch A">Batch A</option>
+              <option value="Batch B">Batch B</option>
+              <option value="Batch C">Batch C</option>
+            </select>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Batch</th>
+                  <th>Course</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="apiTableBody">
+                <tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">Fetching JSON from api/students.php...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="apiPagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;"></div>
+        </div>
+
+        <!-- Add Student via POST Form -->
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Create Student (POST api/students.php)</h3>
+          <form id="addStudentForm" onsubmit="addStudent(event)">
+            <div class="form-row">
+              <input type="text" id="addRoll" class="form-input" placeholder="Roll No (25DIT080)" required>
+              <input type="text" id="addName" class="form-input" placeholder="Full Name" required>
+            </div>
+            <div class="form-row" style="margin-top: 0.5rem;">
+              <input type="email" id="addEmail" class="form-input" placeholder="student@charusat.edu.in" required>
+              <input type="tel" id="addMobile" class="form-input" placeholder="Mobile Number" required>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+              <select id="addBatch" class="form-select" style="width: auto;">
+                <option value="Batch A">Batch A</option>
+                <option value="Batch B">Batch B</option>
+                <option value="Batch C">Batch C</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-sm">+ Dispatch POST Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: Live Network & JSON Inspector -->
+      <div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3 style="font-size: 1.1rem;">API Network Inspector</h3>
+            <span id="httpStatusBadge" class="badge badge-success">HTTP 200</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Verifies raw JSON response wire format and status codes.
+          </p>
+
+          <div style="font-weight: 600; font-size: 0.8rem; margin-bottom: 0.25rem;">Last Request Dispatched:</div>
+          <div class="inspector" id="apiReqLog" style="height: 60px; margin-bottom: 1rem; color: #60A5FA;">No requests made yet.</div>
+
+          <div style="font-weight: 600; font-size: 0.8rem; margin-bottom: 0.25rem;">Server JSON Response:</div>
+          <div class="inspector" id="apiResLog" style="height: 240px;">No response loaded yet.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/api-crud.js"></script>
+</body>
+</html>

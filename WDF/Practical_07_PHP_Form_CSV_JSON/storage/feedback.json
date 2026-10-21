@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Tanis Bedia",
+        "email": "25dit006@charusat.edu.in",
+        "category": "UI",
+        "rating": 5,
+        "comments": "The dark mode palette and timetable schedule view are outstanding.",
+        "submitted_at": "2026-09-29 12:24:14"
+    },
+    {
+        "id": 2,
+        "name": "Tanis Bedia",
+        "email": "25dit006@charusat.edu.in",
+        "category": "Timetable",
+        "rating": 5,
+        "comments": "The portal layout and timetable synchronization are fast and responsive.",
+        "submitted_at": "2026-09-29 12:30:00"
+    }
+]

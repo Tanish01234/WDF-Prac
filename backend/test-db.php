@@ -18,8 +18,8 @@ try {
     $result['success'] = true;
     $result['message'] = 'Database connection successful.';
 
-    // 2. Query Table Row Counts
-    $tables = ['students', 'events', 'registrations'];
+    // 2. Query Table Row Counts across all 6 entities
+    $tables = ['users', 'students', 'events', 'registrations', 'feedback', 'audit_logs'];
     $counts = [];
 
     foreach ($tables as $tbl) {
@@ -30,7 +30,7 @@ try {
 
     $result['diagnostics']['table_counts'] = $counts;
 
-    // 3. Demonstrate Parameterized Prepared Statement
+    // 3. Demonstrate Parameterized Prepared Statement (PDO)
     $sampleRollNo = '25DIT006';
     $prepStmt = $pdo->prepare(
         'SELECT id, roll_no, name, email, course, semester, division, batch 
@@ -40,9 +40,24 @@ try {
     $prepStmt->execute([':roll_no' => $sampleRollNo]);
     $sampleStudent = $prepStmt->fetch();
 
+    // 4. Demonstrate MySQLi Connection & Prepared Statement
+    $mysqli = getMysqliConnection();
+    $mysqliStmt = $mysqli->prepare('SELECT id, username, email, role FROM users WHERE username = ?');
+    $adminUser = 'admin';
+    $mysqliStmt->bind_param('s', $adminUser);
+    $mysqliStmt->execute();
+    $mysqliRes = $mysqliStmt->get_result();
+    $adminRow = $mysqliRes->fetch_assoc();
+
     $result['diagnostics']['sample_query'] = [
-        'parameter' => $sampleRollNo,
-        'matched_record' => $sampleStudent ?: 'No matching record'
+        'pdo_student_query' => [
+            'parameter' => $sampleRollNo,
+            'matched_record' => $sampleStudent ?: 'No matching record'
+        ],
+        'mysqli_user_query' => [
+            'parameter' => $adminUser,
+            'matched_record' => $adminRow ?: 'No matching record'
+        ]
     ];
 
 } catch (Exception $e) {
@@ -65,10 +80,13 @@ if ($isCli) {
             echo "  - {$tbl}: {$cnt} rows\n";
         }
         echo "\nPrepared Statement Demonstration:\n";
-        $student = $result['diagnostics']['sample_query']['matched_record'];
+        $student = $result['diagnostics']['sample_query']['pdo_student_query']['matched_record'];
         if (is_array($student)) {
-            echo "  Query Parameter: :roll_no = '{$sampleRollNo}'\n";
-            echo "  Found: {$student['name']} ({$student['roll_no']}) - {$student['course']} Sem {$student['semester']} ({$student['batch']})\n";
+            echo "  [PDO] :roll_no = '{$sampleRollNo}' -> {$student['name']} ({$student['roll_no']}) - {$student['course']} Sem {$student['semester']}\n";
+        }
+        $admin = $result['diagnostics']['sample_query']['mysqli_user_query']['matched_record'];
+        if (is_array($admin)) {
+            echo "  [MySQLi] username = '{$adminUser}' -> {$admin['username']} ({$admin['email']}) Role: {$admin['role']}\n";
         }
     }
     echo "====================================================\n";
@@ -126,15 +144,26 @@ if ($wantsJson) {
             </div>
 
             <div class="metric-box">
-                <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Prepared Statement Demonstration</h4>
-                <p class="text-xs text-muted font-mono" style="margin-bottom: 0.75rem;">
-                    SELECT * FROM students WHERE roll_no = :roll_no (Param: '25DIT006')
+                <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Prepared Statement Demonstrations</h4>
+                <p class="text-xs text-muted font-mono" style="margin-bottom: 0.5rem;">
+                    [PDO] SELECT * FROM students WHERE roll_no = :roll_no (Param: '25DIT006')
                 </p>
-                <?php $student = $result['diagnostics']['sample_query']['matched_record']; ?>
+                <?php $student = $result['diagnostics']['sample_query']['pdo_student_query']['matched_record']; ?>
                 <?php if (is_array($student)): ?>
-                    <div style="font-size: 0.9rem; line-height: 1.6; color: var(--text-primary);">
+                    <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 0.75rem;">
                         <strong><?= htmlspecialchars($student['name']) ?></strong> (<?= htmlspecialchars($student['roll_no']) ?>)<br>
                         <span class="text-muted"><?= htmlspecialchars($student['email']) ?> • <?= htmlspecialchars($student['course']) ?> Sem <?= htmlspecialchars($student['semester']) ?> (<?= htmlspecialchars($student['batch']) ?>)</span>
+                    </div>
+                <?php endif; ?>
+
+                <p class="text-xs text-muted font-mono" style="margin-bottom: 0.5rem; border-top: 1px solid var(--border-subtle); padding-top: 0.5rem;">
+                    [MySQLi] SELECT * FROM users WHERE username = ? (Param: 'admin')
+                </p>
+                <?php $admin = $result['diagnostics']['sample_query']['mysqli_user_query']['matched_record']; ?>
+                <?php if (is_array($admin)): ?>
+                    <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-primary);">
+                        <strong><?= htmlspecialchars($admin['username']) ?></strong> (<?= htmlspecialchars($admin['email']) ?>)<br>
+                        <span class="badge badge-accent">Role: <?= htmlspecialchars($admin['role']) ?></span>
                     </div>
                 <?php endif; ?>
             </div>

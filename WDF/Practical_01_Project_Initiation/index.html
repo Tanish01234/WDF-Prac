@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 01: Project Initiation, Sitemap, Wireframes & Git Setup</title>
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <style>
+    body { background: var(--bg-primary); color: var(--text-primary); padding: 2.5rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .card-section { background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+    .section-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--accent-primary); display: flex; align-items: center; gap: 0.5rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .wireframe-box { background: var(--bg-elevated); border: 2px dashed var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem; text-align: center; }
+    .wireframe-mini-layout { display: flex; flex-direction: column; gap: 0.5rem; background: var(--bg-card); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-top: 1rem; }
+    .wireframe-bar { height: 16px; background: var(--border-medium); border-radius: 3px; }
+    .wireframe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .wireframe-block { height: 50px; background: var(--border-subtle); border-radius: 4px; }
+    .sitemap-tree { list-style: none; padding-left: 0; }
+    .sitemap-tree li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .sitemap-tree li::before { content: "📁"; position: absolute; left: 0; }
+    .sitemap-tree li.page::before { content: "📄"; }
+    .badge-role { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-medium); padding-bottom: 1.5rem;">
+      <span class="badge badge-accent">CHARUSAT • DEPSTAR IT • Semester 3</span>
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-top: 0.5rem; letter-spacing: -0.02em;">
+        Practical 01: Project Initiation & Architecture Specification
+      </h1>
+      <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.05rem;">
+        Synora Academic Student Portal — Problem Statement, Requirements, 15-Page Sitemap, Wireframes & Git Setup
+      </p>
+    </header>
+
+    <!-- 1. Problem Statement & Objectives -->
+    <section class="card-section">
+      <h2 class="section-title"><span>🎯</span> 1. Problem Statement & Objectives</h2>
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+        <strong>Problem:</strong> Higher education students frequently suffer from schedule fragmentation where timetable changes, lecture attendance tracking (such as DEPSTAR's gross 63% lecture threshold), technical event registrations, and study resource access are scattered across disjointed notice boards and spreadsheets.
+      </p>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        <strong>Objective:</strong> Build a unified, accessible, and responsive student academic portal for B.Tech IT Semester 3 (AY 2026–27) adhering to all 15 syllabus practicals, featuring real-time timetables, attendance monitoring, MySQL database storage, and secure role-based administration.
+      </p>
+    </section>
+
+    <!-- 2. Requirements & User Roles -->
+    <section class="card-section">
+      <h2 class="section-title"><span>👥</span> 2. User Roles & Core Requirements</h2>
+      <div class="grid-2">
+        <div style="background: var(--bg-elevated); padding: 1.25rem; border-radius: var(--radius-md);">
+          <span class="badge-role" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;">Student Role</span>
+          <ul style="margin-top: 0.75rem; padding-left: 1.25rem; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;">
+            <li>View today's live lecture timetable & full schedule</li>
+            <li>Monitor gross lecture attendance (63% threshold)</li>
+            <li>Browse and register for campus workshops & hackathons</li>
+            <li>Submit academic feedback and inquiries</li>
+            <li>Secure authentication and personal profile management</li>
+          </ul>
+        </div>
+        <div style="background: var(--bg-elevated); padding: 1.25rem; border-radius: var(--radius-md);">
+          <span class="badge-role" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">Administrator Role</span>
+          <ul style="margin-top: 0.75rem; padding-left: 1.25rem; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;">
+            <li>View live system aggregates & KPI analytics</li>
+            <li>Student directory CRUD (Create, Read, Update, Delete)</li>
+            <li>Campus event CRUD with safe poster uploads & MIME checks</li>
+            <li>Real-time security and administrative audit logging</li>
+            <li>Role-Based Access Control (RBAC) enforcement</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Sitemap & Page Navigation Flow -->
+    <section class="card-section">
+      <h2 class="section-title"><span>🗺️</span> 3. Information Architecture & Sitemap</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
+        Complete hierarchical map of all portal pages with verified relative routes:
+      </p>
+      <div class="grid-2">
+        <div>
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Public & General Pages</h4>
+          <ul class="sitemap-tree">
+            <li class="page"><strong>index.html</strong> — Public Portal Landing Page</li>
+            <li class="page"><strong>pages/about.html</strong> — Department Information & Leadership</li>
+            <li class="page"><strong>pages/courses.html</strong> — Semester 3 Course Syllabus</li>
+            <li class="page"><strong>pages/schedule.html</strong> — Official Lecture/Lab Timetable</li>
+            <li class="page"><strong>pages/events.html</strong> — Public Technical Events Feed</li>
+            <li class="page"><strong>pages/notices.html</strong> — Department Circulars</li>
+            <li class="page"><strong>pages/faq.html</strong> — Interactive FAQ Accordion</li>
+            <li class="page"><strong>pages/contact.html</strong> — Help Desk & Inquiry Form</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--accent-primary);">Authenticated Student & Admin</h4>
+          <ul class="sitemap-tree">
+            <li class="page"><strong>pages/login.html</strong> — Authentication Gateway (P10)</li>
+            <li class="page"><strong>pages/register.html</strong> — Student Registration Form (P5 & P9)</li>
+            <li class="page"><strong>pages/dashboard.html</strong> — Student Academic Command Center</li>
+            <li class="page"><strong>pages/profile.html</strong> — Student Identity & Enrolled Courses</li>
+            <li class="page"><strong>pages/attendance.html</strong> — Gross 63% Attendance Monitor</li>
+            <li class="page"><strong>pages/feedback.html</strong> — Course & Faculty Feedback</li>
+            <li class="page"><strong>pages/admin-dashboard.html</strong> — Admin Control Center (P14)</li>
+            <li class="page"><strong>pages/admin-students.html</strong> — Student Directory CRUD (P11)</li>
+            <li class="page"><strong>pages/admin-events.html</strong> — Event Management CRUD (P12)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Low-Fidelity Wireframes -->
+    <section class="card-section">
+      <h2 class="section-title"><span>📐</span> 4. Low-Fidelity Wireframe Layouts</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        
+        <div class="wireframe-box">
+          <h4 style="margin-bottom: 0.5rem;">Desktop Layout (1440px)</h4>
+          <p class="text-xs text-muted">Fixed Sidebar (260px) + Fluid 4-Col Grid</p>
+          <div class="wireframe-mini-layout" style="flex-direction: row;">
+            <div style="width: 25%; background: var(--border-medium); height: 110px; border-radius: 3px;"></div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+              <div class="wireframe-bar"></div>
+              <div class="wireframe-grid">
+                <div class="wireframe-block"></div>
+                <div class="wireframe-block"></div>
+                <div class="wireframe-block"></div>
+              </div>
+              <div style="height: 30px; background: var(--border-subtle); border-radius: 4px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wireframe-box">
+          <h4 style="margin-bottom: 0.5rem;">Tablet Layout (768px)</h4>
+          <p class="text-xs text-muted">Collapsible Sidebar + 2-Col Grid</p>
+          <div class="wireframe-mini-layout">
+            <div class="wireframe-bar"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <div class="wireframe-block"></div>
+              <div class="wireframe-block"></div>
+            </div>
+            <div style="height: 45px; background: var(--border-subtle); border-radius: 4px;"></div>
+          </div>
+        </div>
+
+        <div class="wireframe-box">
+          <h4 style="margin-bottom: 0.5rem;">Mobile Layout (375px)</h4>
+          <p class="text-xs text-muted">Stacked Single Column + Off-Canvas Menu</p>
+          <div class="wireframe-mini-layout" style="max-width: 180px; margin: 1rem auto 0;">
+            <div style="height: 12px; background: var(--border-medium); border-radius: 3px;"></div>
+            <div class="wireframe-block" style="height: 35px;"></div>
+            <div class="wireframe-block" style="height: 35px;"></div>
+            <div class="wireframe-block" style="height: 35px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Technical Viva Notes -->
+    <section class="card-section">
+      <h2 class="section-title"><span>💡</span> 5. Viva Preparation: URLs, Browsers & Git</h2>
+      <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+        <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm);">
+          <strong style="color: var(--text-primary);">Q1: What is a URL and what are its parts?</strong><br>
+          A Uniform Resource Locator locates network resources. Parts include Scheme (<code>https://</code>), Subdomain (<code>portal.</code>), Domain (<code>charusat.ac.in</code>), Port (<code>:443</code> or <code>:8000</code>), Path (<code>/pages/events.html</code>), Query String (<code>?category=Workshop</code>), and Fragment (<code>#top</code>).
+        </div>
+        <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm);">
+          <strong style="color: var(--text-primary);">Q2: How does a browser process and render an HTML page?</strong><br>
+          1. <em>Lexical Tokenization</em> converts byte streams into HTML tokens. 2. <em>DOM Construction</em> builds node tree. 3. <em>CSSOM Construction</em> parses stylesheets. 4. <em>Render Tree</em> combines visible DOM + CSSOM nodes. 5. <em>Reflow/Layout</em> calculates exact pixel geometry. 6. <em>Paint & Compositing</em> renders pixels on GPU layers.
+        </div>
+        <div style="background: var(--bg-elevated); padding: 1rem; border-radius: var(--radius-sm);">
+          <strong style="color: var(--text-primary);">Q3: How are atomic Git commits maintained?</strong><br>
+          Atomic commits record single logical units of work using Conventional Commits (<code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>test:</code>), enabling safe rollbacks and clear code audit trails.
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

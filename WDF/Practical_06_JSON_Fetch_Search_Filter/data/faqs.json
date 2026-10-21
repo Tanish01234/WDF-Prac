@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "category": "Academic",
+    "question": "What is the minimum attendance requirement to appear for university exams?",
+    "answer": "As per CHARUSAT academic regulations, students must maintain a minimum of 80% aggregate attendance across lectures and laboratory sessions in each course to be eligible for end-semester examinations."
+  },
+  {
+    "id": 2,
+    "category": "Timetable",
+    "question": "Where can I view my batch-specific practical laboratory timetable?",
+    "answer": "Navigate to the Schedule page from the portal sidebar. You can filter by day or select your practical batch (Batch A, B, or C) to view lab room allocations and faculty details."
+  },
+  {
+    "id": 3,
+    "category": "Events",
+    "question": "How do I register for campus hackathons and workshops?",
+    "answer": "Open the Events section in Synora, browse the available events, use search or category filters, and click on 'View Details & Register'. Complete the registration form before the deadline."
+  },
+  {
+    "id": 4,
+    "category": "Academic",
+    "question": "What subjects are included in B.Tech IT 3rd Semester (Odd Term 2026-27)?",
+    "answer": "The semester covers six key courses: Fundamentals of Computer Networks (ITUC201), Fundamentals of Data Structures and Algorithms (CSUC201), Web Development Frameworks (ITUE203), Object Oriented Programming (CEUE203), Discrete Mathematics (MSUD203), and Creativity, Problem Solving and Innovation (HSUV201)."
+  },
+  {
+    "id": 5,
+    "category": "Portal",
+    "question": "Does Synora save my dark or light theme preference across visits?",
+    "answer": "Yes. Synora uses browser LocalStorage under the key 'synora-theme'. Whenever you toggle the theme icon in the top navigation, your preference is immediately saved and automatically applied on your next visit."
+  },
+  {
+    "id": 6,
+    "category": "Examination",
+    "question": "How is the internal evaluation calculated for laboratory practicals?",
+    "answer": "Continuous internal lab evaluation comprises weekly assignment submissions, lab record maintenance, viva voce, and a mid-semester practical examination as specified in the course syllabus."
+  },
+  {
+    "id": 7,
+    "category": "Portal",
+    "question": "Can I update my profile contact information directly through the portal?",
+    "answer": "Yes. On the Profile page, click the 'Edit Profile' button to open the modal dialogue. You can update your display name, contact mobile, and biography in the frontend demo."
+  },
+  {
+    "id": 8,
+    "category": "Campus",
+    "question": "What are the university library operational hours and borrowing limits?",
+    "answer": "The CHARUSAT Central Knowledge Resource Center is open Monday to Saturday from 08:30 AM to 08:00 PM. B.Tech students can borrow up to 4 books simultaneously for a period of 14 days."
+  },
+  {
+    "id": 9,
+    "category": "Academic",
+    "question": "How can I access digital lecture notes and practical code sheets?",
+    "answer": "Head over to the Resources page. You will find subject-wise modules, lab manuals, curated GitHub repositories, and reference textbooks sorted by department course codes."
+  },
+  {
+    "id": 10,
+    "category": "Registration",
+    "question": "What password requirements must be met when creating a portal account?",
+    "answer": "For security demonstration, passwords must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one numeric digit, and one special character (such as @, #, $, or &)."
+  },
+  {
+    "id": 11,
+    "category": "Campus",
+    "question": "What should I do if I miss a practical session due to medical illness?",
+    "answer": "Submit a medical certificate signed by a registered practitioner to your faculty mentor and the IT department office within three working days to arrange for a makeup lab session."
+  },
+  {
+    "id": 12,
+    "category": "Events",
+    "question": "Are participation certificates provided for campus technical events?",
+    "answer": "Yes. E-certificates verified by CHARUSAT and DEPSTAR are issued to all attendees and winners within 7 working days following the conclusion of any registered event."
+  },
+  {
+    "id": 13,
+    "category": "Placement",
+    "question": "When does campus placement training begin for B.Tech IT students?",
+    "answer": "Aptitude training, competitive coding bootcamps, and soft skills development sessions commence during the 5th semester, with corporate internship drives beginning at the end of the 6th semester."
+  },
+  {
+    "id": 14,
+    "category": "Examination",
+    "question": "How do I apply for re-evaluation or grade verification of semester results?",
+    "answer": "Re-evaluation applications open within 10 days of university result declarations through the examination portal upon payment of the prescribed verification fee per subject."
+  },
+  {
+    "id": 15,
+    "category": "Portal",
+    "question": "Is Synora optimized for mobile and tablet devices?",
+    "answer": "Yes. Synora is designed with responsive CSS Grid and Flexbox layouts. On mobile screens, the navigation transforms into an accessible off-canvas drawer and timetable tables scroll smoothly."
+  },
+  {
+    "id": 16,
+    "category": "Academic",
+    "question": "Who is the faculty coordinator for Web Development Frameworks (ITUE203)?",
+    "answer": "Prof. Jignesh Vania (JV) coordinates lectures with laboratory sessions conducted by Prof. Jignesh Patel (JP) and Prof. Shital Patel (SHP) in labs 206 and 208."
+  }
+]

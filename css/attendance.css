@@ -1,4 +1,3 @@
-
 .attendance-hero {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -247,12 +246,15 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
   .attendance-gross-stat {
     width: 100%;
   }
+
   .attendance-grid {
     grid-template-columns: 1fr;
   }
+
   .table-responsive {
     overflow-x: auto;
   }

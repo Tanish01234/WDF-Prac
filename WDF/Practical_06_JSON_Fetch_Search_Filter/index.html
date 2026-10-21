@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 06: Rendering External JSON Data via Fetch API</title>
+  <link rel="stylesheet" href="css/data-view.css">
+</head>
+<body>
+
+  <div class="container">
+    <header class="header-banner">
+      <div>
+        <span class="badge badge-blue">Practical 06 Demonstration</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; margin-top: 0.35rem;">Dynamic JSON Fetch & Client-Side Filtering</h1>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+          Rendering external JSON datasets with real-time search, category filters, sorting & pagination.
+        </p>
+      </div>
+      <div>
+        <span id="recordCountText" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Loading...</span>
+      </div>
+    </header>
+
+    <!-- Dataset Selector Tabs -->
+    <div class="dataset-tabs">
+      <button type="button" class="tab-btn active" data-target="events" onclick="loadDataset('events')">
+        📅 Events Dataset (16 records)
+      </button>
+      <button type="button" class="tab-btn" data-target="students" onclick="loadDataset('students')">
+        👥 Students Directory (16 records)
+      </button>
+      <button type="button" class="tab-btn" data-target="faqs" onclick="loadDataset('faqs')">
+        ❓ FAQs Dataset (16 records)
+      </button>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="controls-bar">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search records in real-time...">
+      
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <select id="categoryFilter" class="select-filter">
+          <option value="all">All Categories</option>
+        </select>
+
+        <select id="sortSelect" class="select-filter">
+          <option value="title-asc">Sort: A to Z</option>
+          <option value="title-desc">Sort: Z to A</option>
+          <option value="date-asc">Date: Earliest First</option>
+          <option value="date-desc">Date: Latest First</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Loading / Error Alert -->
+    <div id="loadingStatus" style="padding: 1rem; margin-bottom: 1rem; border-radius: 6px; background: var(--bg-elevated); font-size: 0.85rem; display: none;"></div>
+
+    <!-- Dynamic Card Gallery -->
+    <main class="data-grid" id="dataContainer">
+      <!-- Injected by js/fetch-data.js -->
+    </main>
+
+    <!-- Pagination Controls -->
+    <footer class="pagination-bar" id="paginationControls">
+      <!-- Injected by js/fetch-data.js -->
+    </footer>
+  </div>
+
+  <script src="js/fetch-data.js"></script>
+</body>
+</html>

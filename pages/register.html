@@ -37,11 +37,11 @@
       <div class="alert alert-success" id="regSuccessBanner" style="display: none;" role="alert">
         <div>
           <h4>Registration Successful!</h4>
-          <p>Your demo account profile has been validated and recorded for this browser session.</p>
+          <p>Your student account has been securely created in MySQL with Bcrypt password hashing. <a href="login.html" class="font-bold" style="text-decoration: underline;">Click here to Sign In →</a></p>
         </div>
       </div>
 
-      <form id="registrationForm" action="../backend/forms/register.php" method="POST" novalidate>
+      <form id="registrationForm" action="../backend/auth/register.php" method="POST" novalidate>
         <div class="form-group">
           <label class="form-label" for="regName">
             <span>Full Name <span class="required">*</span></span>
@@ -159,7 +159,7 @@
         </div>
 
         <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-          <strong>Practical 7 Server-Side Form Processing:</strong> Submissions are validated by PHP on the server and appended to storage (<code>registrations.csv</code>) following academic security standards (no passwords stored).
+          <strong>Practical 9 Secure Registration:</strong> Submissions are validated server-side, checked for duplicate email/roll numbers, password-hashed using <code>password_hash(..., PASSWORD_BCRYPT)</code>, and recorded in MySQL <code>users</code> & <code>students</code> tables. (P7 CSV processor is also retained at <code>backend/forms/register.php</code>).
         </div>
 
         <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">

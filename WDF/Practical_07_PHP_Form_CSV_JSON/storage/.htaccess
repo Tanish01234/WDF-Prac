@@ -1,0 +1,5 @@
+# Prevent direct public downloads of stored CSV/JSON records (Practical 07 Security)
+<FilesMatch "\.(csv|json|log|txt)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
